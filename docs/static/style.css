@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Michroma';
+  src: url('Michroma/Michroma-Regular.ttf');
+  font-weight: normal;
+  font-size: normal;
+}
+body { background-color: orange; }
+#testtitle {
+  font-size: 75px;
+  font-weight: 900;
+  color: rgb(255, 0, 0);
+  background-color: hsl(0, 0%, 85%);
+  font-family: 'Michroma';
+  text-align: center;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 40%, 0.2);
+  animation-name: Three_Dimentional_Spin;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+@keyframes Three_Dimentional_Spin {
+  100%{transform: rotate3d(0, 1, 0, 360deg);}
+}

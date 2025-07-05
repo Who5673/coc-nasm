@@ -1,0 +1,48 @@
+{
+  "mov": {
+    "prefix": "mov",
+    "body": [
+      "mov ${1:target}, "
+    ],
+    "description": "NASM mov instruction:\nmov [target], [source]"
+  },
+
+  "cmp": {
+    "prefix": "cmp",
+    "body": [
+      "cmp ${1:value1}, "
+    ],
+    "description": "Compare 2 values:\nmov [target], [source]"
+  },
+
+  "The start of an assembly program": {
+    "prefix": "program",
+    "body": [
+      "section .data",
+      "\t${definedata}",
+      "${0}",
+      "section .text",
+      "\tglobal _start",
+      "_start:",
+      "\t${0}"
+    ],
+    "description": "Automatically build the basical start of nasm language"
+  },
+
+  "exit": {
+    "prefix": "exit",
+    "body": [
+      "mov rax, 60",
+      "mov rdi, ${1:exitcode}",
+      "syscall"
+    ],
+    "description": "NASM mov instruction:\nmov [target], [source]"
+  },
+
+  "include directive": {
+    "prefix": "%include",
+    "body": ["%include \"${1:file}\""],
+    "description": "Include a file"
+  }
+}
+

@@ -1,0 +1,43 @@
+{
+  "name": "coc-nasm",
+  "description": "Snippets NASM for coc.nvim",
+  "main": "out/index.js",
+  "version": "0.0.7",
+  "engines": {
+    "coc": "^0.0.80"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Who5673/coc-nasm.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "nasm",
+        "path": "./snippets/nasm.json"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:nasm"
+  ],
+  "keywords": [
+    "coc.nvim",
+    "snippets",
+    "nasm",
+    "who5673"
+  ],
+  "author": "who5673",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.12.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "coc.nvim": "^0.0.80"
+  }
+}
