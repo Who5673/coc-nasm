@@ -31,4 +31,5 @@ __coc-who5673-nasm__ is a vim plug which can be downloaded from coc.nvim. It is 
 ```
 https://who5673.github.io/coc-nasm/templates/index.html
 ```
-Copyright &copy; by who5673. All rights served.
+Copyright &copy; by who5673. All rights served.  
+This is an unofficial coc.nvim plugin for NASM.
