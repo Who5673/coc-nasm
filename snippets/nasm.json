@@ -7,6 +7,14 @@
     "description": "NASM mov instruction:\nmov [target], [source]"
   },
 
+  "section": {
+    "prefix": "section",
+    "body": [
+      "section"
+    ],
+    "description": "Make a section in nasm\nmov section <section>"
+  },
+
   "cmp": {
     "prefix": "cmp",
     "body": [

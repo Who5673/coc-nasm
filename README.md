@@ -25,10 +25,10 @@ __coc-who5673-nasm__ is a vim plug which can be downloaded from coc.nvim. It is 
   
 ## Install coc-who5673-nasm (work in progress, as it may be undone):
 ```
-:CocInstall https://github.com/Who5673/coc-who5673-nasm
+:CocInstall coc-nasm
 ```
 ## Our website (work in progress):
 ```
-https://who5673.github.io/coc-who5673-nasm/templates/index.html
+https://who5673.github.io/coc-nasm/templates/index.html
 ```
 Copyright &copy; by who5673. All rights served.
