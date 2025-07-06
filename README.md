@@ -35,5 +35,25 @@ https://who5673.github.io/coc-nasm/templates/index.html
 - Publish date: The sixth of July, 2025
 - This package is under MIT License, open-source
 - It is not the first Netwide Assembler plugin and snippet in the world, though it is one of it due to the lack of plugins for NASM in VS Code and Vi Improved (this is true for Neovim (nvim)).
+
+## Dependencies
+Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you also can install them from coc.nvim.
+**Firstly**, to make sure that coc-nasm works correctly, after installing, you need to:
+- Open a `.nasm` file.
+- Make sure you have coc.nvim installed (coc.nvim is invented by neoclide)
+(github link: [`coc.nvim`](https://github.com/neoclide/coc.nvim))
+__Secondly__, install coc-snippets, as coc-nasm depends much on it:  
+```
+:CocInstall coc-snippets
+```
+
+github link for coc-snippets (coc-snippets is invented by neoclide): [`coc-snippets`](https://github.com/neoclide/coc-snippets)
+
+- Execute this command in vim command mode: 
+```
+:CocRestart
+```
+- Reload vim or restart your computer if necessary.
+
 Copyright &copy; by who5673. All rights served.  
 This is an unofficial coc.nvim plugin for NASM.
