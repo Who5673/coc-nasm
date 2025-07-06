@@ -81,13 +81,19 @@
   "include directive": {
     "prefix": "%include",
     "body": ["%include \"${1:file}\""],
-    "description": "Include a file"
+    "description": "Include a nasm file"
   },
 
   "jge": {
     "prefix": "jge",
     "body": ["jge ${1:label}"],
     "description": "Jump to a label if in cmp, the previous label is greater than or equal to the target value"
+  },
+
+  "jmp": {
+    "prefix": "jmp",
+    "body": ["jmp ${1:label}"],
+    "description": "Jump to a label without any conditions"
   },
 
   "jne": {
@@ -118,6 +124,13 @@
     "prefix": "jl",
     "body": ["jl ${1:label}"],
     "description": "Jump to a label if in cmp, the previous label is lower than the target value"
+  },
+
+  "call": {
+    "prefix": "call",
+    "body": ["call ${functionname}"],
+    "description": "call a function"
   }
+
 }
 

@@ -24,7 +24,6 @@ const nasmInstructions = [
     ['mul', 'Multiply'],
     ['div', 'Divide'],
     ['int', 'Interrupt'],
-    ['call', 'Call procedure'],
     ['ret', 'Return from procedure'],
     ['push', 'Push to stack'],
     ['pop', 'Pop from stack'],
