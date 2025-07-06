@@ -2,7 +2,7 @@
   "name": "coc-nasm",
   "description": "Snippets NASM for coc.nvim",
   "main": "out/index.js",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "engines": {
     "coc": "^0.0.80"
   },
