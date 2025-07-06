@@ -99,6 +99,10 @@ const nasmInstructions: [string, string][] = [
   ['resw', 'uninitialized n words (2n bytes)'],
   ['resd', 'uninitialized n double words (4n bytes)'],
   ['resq', 'uninitialized n quad word (8n bytes)'],
+  ['equ', 'define a constant'],
+  ['msg', 'popular word for label'],
+  ['buffer', 'popular word for buffer'],
+  ['len', 'popular word for string length'],
 ];
 
 class NasmCompletionProvider implements CompletionItemProvider {
