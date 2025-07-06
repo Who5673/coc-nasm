@@ -53,7 +53,7 @@
   "section": {
     "prefix": "section",
     "body": [
-      "section"
+      "section ${1:section}"
     ],
     "description": "Make a section in nasm\nmov section <section>"
   },
