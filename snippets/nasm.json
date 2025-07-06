@@ -92,7 +92,7 @@
 
   "include directive": {
     "prefix": "include",
-    "body": ["include \"${1:file}\""],
+    "body": ["\%include \"${1:file}\""],
     "description": "Include a nasm file"
   },
 
