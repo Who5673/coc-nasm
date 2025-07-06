@@ -51,6 +51,42 @@
     "prefix": "%include",
     "body": ["%include \"${1:file}\""],
     "description": "Include a file"
+  },
+
+  "jge": {
+    "prefix": "jge",
+    "body": ["jge ${1:label}"],
+    "description": "Jump to a label if in cmp, the previous label is greater than or equal to the target value"
+  },
+
+  "jne": {
+    "prefix": "jne",
+    "body": ["jne ${1:label}"],
+    "description": "Jump to a label if in cmp, the previous label is not equal to the target value"
+  },
+
+  "je": {
+    "prefix": "je",
+    "body": ["je ${1:label}"],
+    "description": "Jump to a label if in cmp, the previous label is equal to the target value"
+  },
+
+  "jle": {
+    "prefix": "jle",
+    "body": ["jle ${1:label}"],
+    "description": "Jump to a label if in cmp, the previous label is lower than or equal to the target value"
+  },
+
+  "jg": {
+    "prefix": "jg",
+    "body": ["jg ${1:label}"],
+    "description": "Jump to a label if in cmp, the previous label is greater than the target value"
+  },
+
+  "jl": {
+    "prefix": "jl",
+    "body": ["jl ${1:label}"],
+    "description": "Jump to a label if in cmp, the previous label is lower than the target value"
   }
 }
 
