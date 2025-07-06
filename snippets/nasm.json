@@ -15,6 +15,18 @@
     ],
     "description": "This is the syntax to establish (set up) a function in nasm."
   },
+  
+  "newline": {
+    "prefix": "newline",
+    "body": [
+      "mov rax, 1",
+      "mov rdi, 1",
+      "mov rsi, \"\\n\"",
+      "mov rdx, 1",
+      "syscall"
+    ],
+    "description": "This is a snippet for printing a newline in nasm"
+  },
 
   "printHello": {
     "prefix": "printHello",
