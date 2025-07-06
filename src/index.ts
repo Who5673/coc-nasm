@@ -37,6 +37,17 @@ class NasmCompletionProvider implements CompletionItemProvider {
         detail: 'Move data from source to destination (mov [destination], [source].)',
       },
       {
+        label: 'lea',
+        kind: CompletionItemKind.Keyword,
+        detail: 'lea command to work with memory'
+      },
+      {
+        label: 'rep',
+        kind: CompletionItemKind.Keyword,
+        detail: "rep command"
+      },
+
+      {
         label: 'jmp',
         kind: CompletionItemKind.Keyword,
         detail: 'Jump to a label',
@@ -56,10 +67,17 @@ class NasmCompletionProvider implements CompletionItemProvider {
         kind: CompletionItemKind.Keyword,
         detail: 'Increment operand (inc something = something += 1)',
       },
+
+      // Registers:
       {
         label: 'eax',
         kind: CompletionItemKind.Keyword,
         detail: 'Register EAX',
+      },
+      {
+        label: 'ebx',
+        kind: CompletionItemKind.Keyword,
+        detail: 'Register EBX',
       },
       {
         label: 'rax',
@@ -86,6 +104,23 @@ class NasmCompletionProvider implements CompletionItemProvider {
         kind: CompletionItemKind.Keyword,
         detail: 'Register RBX',
       },
+      {
+        label: 'al',
+        kind: CompletionItemKind.Keyword,
+        detail: "Register AL"
+      },
+      {
+        label: 'ecx',
+        kind: CompletionItemKind.Keyword,
+        detail: "Register ECX",
+      },
+      {
+        label: 'edx',
+        kind: CompletionItemKind.Keyword,
+        detail: 'Register edx'
+      },
+
+      // Others
       {
         label: 'add',
         kind: CompletionItemKind.Keyword,
@@ -144,7 +179,7 @@ class NasmCompletionProvider implements CompletionItemProvider {
       {
         label: 'resb',
         kind: CompletionItemKind.Keyword,
-        detail: 'Define and use memory for non-initialized data (avoid buffer overflow while reading something)',
+        detail: 'Define and use memory for non-initialized data (avoid buffer overflow while reading something) for n bytes',
       },
       {
         label: 'global',
@@ -155,7 +190,24 @@ class NasmCompletionProvider implements CompletionItemProvider {
         label: '_start',
         kind: CompletionItemKind.Keyword,
         detail: 'The label for nasm to start the program.'
-      }
+      },
+      {
+        label: "resw",
+        kind: CompletionItemKind.Keyword,
+        detail: 'Create non-initialized memory for n words (2n bytes)',
+      },
+      {
+        label: "resd",
+        kind: CompletionItemKind.Keyword,
+        detail: 'Create non-initialized memory for n dwords (4n bytes)',
+      },
+      {
+        label: "resq",
+        kind: CompletionItemKind.Keyword,
+        detail: "Create non-initialized memory for n qwords (8n bytes)",
+      },
+
+      // 
     ];
   }
 }

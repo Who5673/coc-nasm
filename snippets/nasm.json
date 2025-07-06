@@ -7,6 +7,15 @@
     "description": "NASM mov instruction:\nmov [target], [source]"
   },
   
+  "function": {
+    "prefix": "function",
+    "body": [
+      "${1:functionname}:",
+      "\tret"
+    ],
+    "description": "This is the syntax to establish (set up) a function in nasm."
+  },
+
   "printHello": {
     "prefix": "printHello",
     "body": [
