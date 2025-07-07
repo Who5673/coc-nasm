@@ -1,8 +1,8 @@
 {
   "name": "coc-nasm",
-  "description": "Snippets NASM for coc.nvim",
+  "description": "This is the snippets and autocompletions for Netwide Assembler language in coc.nvim",
   "main": "out/index.js",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "engines": {
     "coc": "^0.0.80"
   },

@@ -38,6 +38,7 @@ https://who5673.github.io/coc-nasm/templates/index.html
 - __However__, it is one of the **strong** plugin for NASM.
 - Netwide Assembler does have a lack of good plugins for snippets and auto-completions so that is why coc-nasm needs to be invented.
 - coc-nasm has snippets and auto-completions for NASM, but note: This plugin does not support syntax highlighting. You may need them by installing third-party plugins for NASM. Fortunately, vim supports syntax highlighting for that language.
+- If you have any problem about this plugin, please fix it by yourself as this product is __NO WARRANTY__. However, I will tell you that my contact information is in contact.txt in GitHub repository.
 
 ## Dependencies
 Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you also can install them from coc.nvim.
@@ -62,20 +63,25 @@ github link for coc-snippets (coc-snippets is invented by neoclide): [`coc-snipp
 coc-nasm has some special words for NASM to use like:
 - `printHello` (snippet): Print an example Netwide Assembler program (for Linux, it prints "Hello world");  
 - `program` (snippet): Get a basic template of a Netwide Assembler program to start coding faster (if you want to make a library, do not use this snippet);  
+- `sum` (snippet): Get a basic example of a function that calculates the sum of 2 integers.  
+- `default rel` (auto-completion): Must put this at the 1^st (first) line of the NASM language if you want to create and import a NASM library into C/C++ or in another NASM script.
 - Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
 - You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/\_vimrc (Windows)
 
 ## Please Note:
+- You can use this plugin on Windows, but I recommend you to use this on Linux as I write this plugin on Kali Linux so that I may not know the issue it will happen in Windows Latest Version.
 - As NASM does not have many long and new commands, we cannot support all the things like plugins for high-level language. __Please note that NASM is a low-level language so you need to have skills from higher language than it. We strongly recommend that you need to learn how to program C and C++ first__.  
-- __Another important thing__ is that I do not want to add the feature that checks and alerts the wrong syntax in your script due to some mistakes must be made for another program running (such as emcc latest version), so if you use it, you need to learn how to debug and maintain your NASM script. Yep, __NO WARRANTY__.  
-- By the way, I hope that you waill help me to __make this plugin better for developers__ in the future. Due to the high difficulty of NASM, that will not be easy to do. However, I will also carry on developing newer version of coc-nasm even no one uses my plugin.  
-- I also suggest that you should write some plugins for yourself, especially Assemblers' plugins in general.  
+- __Another important thing__ is that I do not want to add the feature that checks and alerts the wrong syntax in your script due to some mistakes must be made for another program running (such as emcc latest version), so if you use it, you need to learn how to debug and maintain your NASM script. Yep, __NO WARRANTY__.
+- By the way, I hope that you will help me to __make this plugin better for developers__ in the future. Due to the high difficulty of NASM, that will not be easy to do. However, I will also carry on developing newer version of coc-nasm even no one uses my plugin.  
+- I also suggest that you should write some plugins for yourself, especially Assemblers' plugins in general (such as GNU Assembler - GAS).
 - As I have searched for NASM plugins, I realize that almost all of VS Code extensions, coc.nvim and many more IDE and plugs do not support NASM language.  
 - After reading those articles, I have a question like this:  
-___Would you like to write more plugins for programming Netwide Assembler in the world?___  
+___Would you like to write more plugins for programming Netwide Assembler language in the world?___  
 - Please answer my question in your mind and come up with your idea if you can. You do not need to send that idea to me.  
+  
 Thank you for using my coc-nasm plugin so much.  
   
 <hr />
 Copyright &copy; by who5673. All rights served.  
+  
 This is an official coc.nvim plugin for NASM (made by who5673).  

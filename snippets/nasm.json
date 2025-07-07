@@ -6,7 +6,24 @@
     ],
     "description": "NASM mov instruction:\nmov [target], [source]"
   },
-  
+
+  "sum": {
+    "prefix": "sum",
+    "body": [
+      "section .text",
+      "\tglobal sum",
+      "sum:",
+      "\tmov rax, rdi   ; rax = Return value, rdi = a = argv[1]",
+      "\tadd rax, rsi   ; rsi = b = argv[2]",
+      "\tret            ; Returns rax = a + b = rdi + rsi"
+    ],
+    "description": [
+      "This is an example of a function in NASM", 
+      "Note: rax = RETURN, rdi = argv[1], rsi = argv[2], rdx = argv[3], rcx = argv[4],",
+      "r8 = argv[5], r9 = argv[6]"
+    ]
+  },
+
   "function": {
     "prefix": "function",
     "body": [
