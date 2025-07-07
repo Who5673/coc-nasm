@@ -29,7 +29,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
   );
 }
 const nasmInstructions: [string, string][] = [
-  ['default rel', 'This code must be at the first line of the script in order to compile using gcc/g++ if you extern this from C/C++.'],
+  ['default', 'This code must be at the first line of the script if you combine with rel in order to compile using gcc/g++ if you extern this from C/C++.'],
+  ['rel', 'rel command'],
   ['mov', 'Move data from source to destination (mov [dst], [src])'],
   ['lea', 'lea command to work with memory'],
   ['rep', 'Repeat string operation'],
