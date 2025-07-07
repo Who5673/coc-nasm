@@ -32,9 +32,12 @@ __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one
 https://who5673.github.io/coc-nasm/templates/index.html
 ```
 ## About coc-nasm
-- Publish date: The sixth of July, 2025
-- This package is under MIT License, open-source
-- It is not the first Netwide Assembler plugin and snippet in the world, though it is one of it due to the lack of plugins for NASM in VS Code and Vi Improved (this is true for Neovim (nvim)).
+- Publish date: The sixth of July, 2025.
+- This package is under MIT License, open-source.
+- Maybe it is not the first Netwide Assembler plugin for auto-completion and snippet in the world.
+- __However__, it is one of the **strong** plugin for NASM.
+- Netwide Assembler does have a lack of good plugins for snippets and auto-completions so that is why coc-nasm needs to be invented.
+- coc-nasm has snippets and auto-completions for NASM, but note: This plugin does not support syntax highlighting. You may need them by installing third-party plugins for NASM. Fortunately, vim supports syntax highlighting for that language.
 
 ## Dependencies
 Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you also can install them from coc.nvim.
@@ -53,7 +56,25 @@ github link for coc-snippets (coc-snippets is invented by neoclide): [`coc-snipp
 ```
 :CocRestart
 ```
-- Reload vim or restart your computer if necessary.
+- Reload vim or restart your computer if necessary.  
+- __Other suggested plugins for coc-nasm__: 
+## Features
+coc-nasm has some special words for NASM to use like:
+- `printHello` (snippet): Print an example Netwide Assembler program (for Linux, it prints "Hello world");  
+- `program` (snippet): Get a basic template of a Netwide Assembler program to start coding faster (if you want to make a library, do not use this snippet);  
+- Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
+- You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/\_vimrc (Windows)
 
+## Please Note:
+- As NASM does not have many long and new commands, we cannot support all the things like plugins for high-level language. __Please note that NASM is a low-level language so you need to have skills from higher language than it. We strongly recommend that you need to learn how to program C and C++ first__.  
+- __Another important thing__ is that I do not want to add the feature that checks and alerts the wrong syntax in your script due to some mistakes must be made for another program running (such as emcc latest version), so if you use it, you need to learn how to debug and maintain your NASM script.  
+- By the way, I hope that you waill help me to __make this plugin better for developers__ in the future. Due to the high difficulty of NASM, that will not be easy to do. However, I will also carry on developing newer version of coc-nasm even no one uses my plugin.  
+- I also suggest that you should write some plugins for yourself, especially Assemblers' plugins in general.  
+- As I have searched for NASM plugins, I realize that almost all of VS Code extensions, coc.nvim and many more IDE and plugs do not support NASM language.  
+- After reading those articles, I have a question like this: ___Would you like to write more plugins for programming Netwide Assembler in the world?___  
+- Please answer my question in your mind and come up with your idea if you can.  
+Thank you for using my coc-nasm plugin so much.  
+  
+<hr /><hr />
 Copyright &copy; by who5673. All rights served.  
-This is an unofficial coc.nvim plugin for NASM.
+This is an official coc.nvim plugin for NASM (made by who5673).
