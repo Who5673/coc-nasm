@@ -67,14 +67,15 @@ coc-nasm has some special words for NASM to use like:
 
 ## Please Note:
 - As NASM does not have many long and new commands, we cannot support all the things like plugins for high-level language. __Please note that NASM is a low-level language so you need to have skills from higher language than it. We strongly recommend that you need to learn how to program C and C++ first__.  
-- __Another important thing__ is that I do not want to add the feature that checks and alerts the wrong syntax in your script due to some mistakes must be made for another program running (such as emcc latest version), so if you use it, you need to learn how to debug and maintain your NASM script.  
+- __Another important thing__ is that I do not want to add the feature that checks and alerts the wrong syntax in your script due to some mistakes must be made for another program running (such as emcc latest version), so if you use it, you need to learn how to debug and maintain your NASM script. Yep, __NO WARRANTY__.  
 - By the way, I hope that you waill help me to __make this plugin better for developers__ in the future. Due to the high difficulty of NASM, that will not be easy to do. However, I will also carry on developing newer version of coc-nasm even no one uses my plugin.  
 - I also suggest that you should write some plugins for yourself, especially Assemblers' plugins in general.  
 - As I have searched for NASM plugins, I realize that almost all of VS Code extensions, coc.nvim and many more IDE and plugs do not support NASM language.  
-- After reading those articles, I have a question like this: ___Would you like to write more plugins for programming Netwide Assembler in the world?___  
-- Please answer my question in your mind and come up with your idea if you can.  
+- After reading those articles, I have a question like this:  
+___Would you like to write more plugins for programming Netwide Assembler in the world?___  
+- Please answer my question in your mind and come up with your idea if you can. You do not need to send that idea to me.  
 Thank you for using my coc-nasm plugin so much.  
   
-<hr /><hr />
+<hr />
 Copyright &copy; by who5673. All rights served.  
-This is an official coc.nvim plugin for NASM (made by who5673).
+This is an official coc.nvim plugin for NASM (made by who5673).  
