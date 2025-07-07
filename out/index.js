@@ -44,7 +44,9 @@ const nasmInstructions = [
     ['stosb', 'normally used with rep to write bytes from one place to another'],
     ['cmpsb', 'normally used with repne to compare different byte strings'],
     ['repne', 'like rep but used for cmpsb to compare strings'],
+    ['MOD', 'Modulus operator'],
     // Registers:
+    // 64-bit:
     ['rax', 'Register RAX'], ['rbx', 'Register RBX'], ['rcx', 'Register RCX'], ['rdx', 'Register RDX'],
     ['rsi', 'Register RSI'], ['rdi', 'Register RDI'], ['rsp', 'Register RSP'], ['rbp', 'Register RBP'],
     ['r8', 'Register R8'], ['r9', 'Register R9'], ['r10', 'Register R10'], ['r11', 'Register R11'],

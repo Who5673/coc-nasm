@@ -21,13 +21,13 @@
     "body": [
       "mov rax, 1",
       "mov rdi, 1",
-      "mov rsi, \"\\n\"",
+      "mov rsi, 10",
       "mov rdx, 1",
       "syscall"
     ],
     "description": "This is a snippet for printing a newline in nasm"
   },
-
+  
   "printHello": {
     "prefix": "printHello",
     "body": [

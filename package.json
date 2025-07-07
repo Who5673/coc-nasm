@@ -2,7 +2,7 @@
   "name": "coc-nasm",
   "description": "Snippets NASM for coc.nvim",
   "main": "out/index.js",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "engines": {
     "coc": "^0.0.80"
   },
@@ -29,7 +29,13 @@
     "coc.nvim",
     "snippets",
     "nasm",
-    "who5673"
+    "Netwide Assembler",
+    "NASM",
+    "plugin",
+    "Assembler",
+    "assembler",
+    "who5673",
+    "vim"
   ],
   "author": "who5673",
   "license": "MIT",
