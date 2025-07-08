@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='bridge.js') }}"></script>
+    <script src="{{ url_for('static', filename='frontend.js') }}"></script>
     <!--link rel="shortcut icon" href="favicon.ico" type="image/x-icon"-->
     <title>coc-who5673-nasm Home Page</title>
   </head>
   <body>
     <h1 id="testtitle">This page is being worked in progress</h1>
+    <p>Result of a + b = {{ result }}</p>
   </body>
 </html>
