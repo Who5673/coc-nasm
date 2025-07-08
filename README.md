@@ -31,8 +31,10 @@ __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one
 ```
 https://who5673.github.io/coc-nasm/templates/index.html
 ```
+As I have a problem with python3-flask and GitHub pages, I cannot build this website now.  
 ## About coc-nasm
-- Publish date: The sixth of July, 2025.
+- Manufacturing date: The 6^th of July, 2025 (7/6/2025 - mm/dd/yy).
+- Reddit publish date: The 7^th of July, 2025 (7/6/2025 - mm/dd/yy).
 - This package is under MIT License, open-source.
 - Maybe it is not the first Netwide Assembler plugin for auto-completion and snippet in the world.
 - __However__, it is one of the **strong** plugin for NASM.
@@ -58,6 +60,8 @@ github link for coc-snippets (coc-snippets is invented by neoclide): [`coc-snipp
 :CocRestart
 ```
 - Reload vim or restart your computer if necessary.  
+- Now, as I does not use Neovim's Lua, I cannot support you to install this plugin via ~/.config/nvim/init.lua. If you know how to install this plugin using Lua, I think you will need to think of about the installation by yourself (even this can work on Neovim via Lua).
+
 - __Other suggested plugins for coc-nasm__: 
 ## Features
 coc-nasm has some special words for NASM to use like:
@@ -65,10 +69,14 @@ coc-nasm has some special words for NASM to use like:
 - `program` (snippet): Get a basic template of a Netwide Assembler program to start coding faster (if you want to make a library, do not use this snippet);  
 - `sum` (snippet): Get a basic example of a function that calculates the sum of 2 integers.  
 - `default rel` (auto-completion): Must put this at the 1^st (first) line of the NASM language if you want to create and import a NASM library into C/C++ or in another NASM script.
+- `const` (snippet): `equ $-labelname` snippet to calculate the length of a string. Place this right after you have defined byte a string label.
+- `pi64` and `pi32` (snippets): Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture.
 - Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
 - You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/\_vimrc (Windows)
 
 ## Please Note:
+- This plugin is created so as to make you write the script faster, not for creating an environment to code NASM language more modern.  
+Therefore, I am not going to make a Language Server Protocol (LSP), formatters, IntelliSense, live preview or hot Reload, like modern plugins on VS Code and coc.nvim do.  
 - You can use this plugin on Windows, but I recommend you to use this on Linux as I write this plugin on Kali Linux so that I may not know the issue it will happen in Windows Latest Version.
 - As NASM does not have many long and new commands, we cannot support all the things like plugins for high-level language. __Please note that NASM is a low-level language so you need to have skills from higher language than it. We strongly recommend that you need to learn how to program C and C++ first__.  
 - __Another important thing__ is that I do not want to add the feature that checks and alerts the wrong syntax in your script due to some mistakes must be made for another program running (such as emcc latest version), so if you use it, you need to learn how to debug and maintain your NASM script. Yep, __NO WARRANTY__.

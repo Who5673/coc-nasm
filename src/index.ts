@@ -34,7 +34,7 @@ const nasmInstructions: [string, string][] = [
   ['mov', 'Move data from source to destination (mov [dst], [src])'],
   ['lea', 'lea command to work with memory'],
   ['rep', 'Repeat string operation'],
-  ['jnz', 'Jump if not zero'],
+  ['jnz', 'Jump if ZF != 0 (ZF stands for Zero Flag)'],
   ['loop', 'loop = dec and jnz'],
   ['add', 'Add integers'],
   ['sub', 'Subtract integers'],
@@ -61,6 +61,26 @@ const nasmInstructions: [string, string][] = [
   ['cmpsb', 'normally used with repne to compare different byte strings'],
   ['repne', 'like rep but used for cmpsb to compare strings'],
   ['MOD', 'Modulus operator'],
+  ['sete', 'Compare and initialize a value to a register based on the result of the contition in previous cmp (sete has == operator).\nZF = 1 for this operator.\nZF stands for Zero Flag, SF stands for Sign Flag, OF stands for Overflow Flag, and CF stands for Carry Flag'],
+  ['setne', '(setne has != operator) See sete for instructions for setxx.\nZF = 0'],
+  ['setg', '(setg has > operator) See sete for setxx instructions.\nZF = 0 and SF = OF'],
+  ['setge', '(setge has >= operator) See sete for setxx instructions.\nSF = OF'],
+  ['setl', '(setl has < operator) See sete for setxx instructions.\nSF != OF'],
+  ['setle', '(sele has <= operator) See sete for setxx instructions.\nZF = 1 or SF != OF'],
+  ['seta', '(unsigned > operator, unsigned means that you want to compare the absolute (abs) value of 2 variables/labels) See sete for setxx instructions.\nCF = 0, ZF = 0'],
+  ['setb', '(unsigned < operator) See sete for setxx instructions and seta for unsigned instructions.\nCF = 1'],
+  ['setae', '(unsigned <= operator) See sete for setxx instructions and seta for unsigned instructions.\nCF = 0'],
+  ['setbe', '(unsigned <= operator) See sete for setxx instructions and seta for unsigned instructions.\nCF = 1 or ZF = 1'],
+  ['sets', 'Is the value less than 0?\nSF = 1'],
+  ['setns', 'Is the value a nature number that is greater than 0?\nSF = 0'],
+  ['seto', 'Do any overflows appear?\nOF = 1'],
+  ['setno', 'Don\'t any overflows appear?\nOF = 0'],
+  ['setc', 'Does the comparison have any carry flags?\nCF = 1'],
+  ['setnc', 'Doesn\'t the comparison have any carry flags?\nCF = 0'],
+  ['setz', 'Is that value/comparison equal to 0?\nZF = 1 (sete)'],
+  ['setnz', 'Isn\'t that value/comparison equal to 0?\nZF = 0 (setne)'],
+  ['setp', 'Parity even bit memory?\nPF = 1'],
+  ['setnp', 'Parity odd bit memory?\nPF = 0'],
   
   // Registers:
   // 64-bit:
@@ -93,7 +113,7 @@ const nasmInstructions: [string, string][] = [
   ['ss', 'Register SS (Stack Segment)'], ['es', 'Register ES (Extra Segment)'],
   ['fs', 'Register FS'], ['gs', 'Register GS'],
 
-  // Flags (nếu bạn muốn thêm về sau)
+  // Flags 
   // ['eflags', 'EFLAGS Register'],
   // ['rflags', 'RFLAGS Register'],
   // Some important sections:

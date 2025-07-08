@@ -24,6 +24,30 @@
     ]
   },
 
+  "equal to a len of a string": {
+    "prefix": "const",
+    "body": [
+      "equ $-${stringlabelname}"
+    ],
+    "description": "Calculate a length of a string. Place this thing right after you have defined byte a string value"
+  },
+  
+  "basic pi (64-bit)": {
+    "prefix": "pi64",
+    "body": [
+      "pi dq 3.14${0}"
+    ],
+    "description": "Basic pi constant (64-bit)."
+  },
+
+  "basic pi (32-bit)": {
+    "prefix": "pi32",
+    "body": [
+      "pi dd 3.14${0}"
+    ],
+    "description": "Basic pi constant (32-bit)."
+  },
+
   "function": {
     "prefix": "function",
     "body": [
