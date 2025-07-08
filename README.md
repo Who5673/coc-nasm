@@ -29,7 +29,7 @@ __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one
 ```
 ## Our website (work in progress):
 ```
-https://who5673.github.io/coc-nasm/templates/index.html
+https://who5673.github.io/coc-nasm/
 ```
 As I have a problem with python3-flask and GitHub pages, I cannot build this website now.  
 ## About coc-nasm
