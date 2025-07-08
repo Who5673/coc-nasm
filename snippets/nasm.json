@@ -133,7 +133,7 @@
 
   "include directive": {
     "prefix": "include",
-    "body": ["\%include \"${1:file}\""],
+    "body": ["include \"${1:file}\""],
     "description": "Include a nasm file"
   },
 
@@ -183,7 +183,18 @@
     "prefix": "call",
     "body": ["call ${functionname}"],
     "description": "call a function"
+  },
+
+  "Basic script for outputing a variable/label": {
+    "prefix": "basicoutput",
+    "body": [
+      "mov rax, 1",
+      "mov rdi, 1",
+      "mov rsi, ${messagevalue}",
+      "mov rdx, ${len}",
+      "syscall"
+    ],
+    "description": "This script shows how to print a label basically"
   }
 
 }
-

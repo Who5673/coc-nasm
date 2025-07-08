@@ -30,14 +30,15 @@ export async function activate(context: ExtensionContext): Promise<void> {
 }
 const nasmInstructions: [string, string][] = [
   ['default', 'This code must be at the first line of the script if you combine with rel in order to compile using gcc/g++ if you extern this from C/C++.'],
+  ['neg', 'neg command - compute the absolute value (abs) of a register'],
   ['rel', 'rel command'],
   ['mov', 'Move data from source to destination (mov [dst], [src])'],
   ['lea', 'lea command to work with memory'],
   ['rep', 'Repeat string operation'],
   ['jnz', 'Jump if ZF != 0 (ZF stands for Zero Flag)'],
   ['loop', 'loop = dec and jnz'],
-  ['add', 'Add integers'],
-  ['sub', 'Subtract integers'],
+  ['add', 'Add an integer value into a variable/label.\nExample: add rax, 5'],
+  ['sub', 'Subtract an integer value into a variable/label.\nExample: sub rax, 2'],
   ['mul', 'Multiply'],
   ['div', 'Divide'],
   ['int', 'Interrupt'],

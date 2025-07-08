@@ -32,6 +32,10 @@ __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one
 https://who5673.github.io/coc-nasm/
 ```
 As I have a problem with python3-flask and GitHub pages, I cannot build this website now.  
+__However__, I still have some website goals:
+- Have backend (cannot build now) and frontend.
+- Build the website using WebAssembly (WASM) and Netwide Assembler.
+
 ## About coc-nasm
 - Manufacturing date: The 6^th of July, 2025 (7/6/2025 - mm/dd/yy).
 - Reddit publish date: The 7^th of July, 2025 (7/6/2025 - mm/dd/yy).
@@ -71,6 +75,7 @@ coc-nasm has some special words for NASM to use like:
 - `default rel` (auto-completion): Must put this at the 1^st (first) line of the NASM language if you want to create and import a NASM library into C/C++ or in another NASM script.
 - `const` (snippet): `equ $-labelname` snippet to calculate the length of a string. Place this right after you have defined byte a string label.
 - `pi64` and `pi32` (snippets): Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture.
+- `basicoutput` (snippet): Write a basic script to print a variable into stdout (terminal screen). 
 - Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
 - You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/\_vimrc (Windows)
 
@@ -84,7 +89,7 @@ Therefore, I am not going to make a Language Server Protocol (LSP), formatters, 
 - I also suggest that you should write some plugins for yourself, especially Assemblers' plugins in general (such as GNU Assembler - GAS).
 - As I have searched for NASM plugins, I realize that almost all of VS Code extensions, coc.nvim and many more IDE and plugs do not support NASM language.  
 - After reading those articles, I have a question like this:  
-___Would you like to write more plugins for programming Netwide Assembler language in the world?___  
+___Would you like to write more plugins for programming Assembler languages in the world?___  
 - Please answer my question in your mind and come up with your idea if you can. You do not need to send that idea to me.  
   
 Thank you for using my coc-nasm plugin so much.  
