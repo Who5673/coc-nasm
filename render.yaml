@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: coc-nasm
+    env: python
+    region: oregon
+    buildCommand: ./build.sh
+    startCommand: backend.py
+    envVars:
+      - key: LD_LIBRARY_PATH
+        value: .
