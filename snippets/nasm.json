@@ -128,7 +128,7 @@
       "mov rdi, ${1:exitcode}",
       "syscall"
     ],
-    "description": "NASM mov instruction:\nmov [target], [source]"
+    "description": "The code to exit the program with your custom exit code"
   },
 
   "include directive": {
