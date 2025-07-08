@@ -1,5 +1,3 @@
-const {log} = require("console");
-
 // frontend.js
 Module.onRuntimeInitialized = () => {
   const returnformat = Module.cwrap('returnformat', 'string', ['string']);
