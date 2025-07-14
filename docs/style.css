@@ -1,27 +1,96 @@
+/* Custom font from fonts.google.com */
 @font-face {
   font-family: 'Michroma';
   src: url('Michroma/Michroma-Regular.ttf');
   font-weight: normal;
   font-size: normal;
 }
-body { background-color: orange; }
+
+/* Background configuration */
+body {
+  background-color: hsl(0, 0%, 50%);
+}
+body.light {
+  background-color: hsl(0, 0%, 100%);
+}
+#light {
+  background-color: blue;
+  border: 1px solid;
+  box-shadow: -4px 4px 4px hsl(0, 4%, 24%);
+}
+#light:hover {
+  background-color: rgb(34, 34, 110);
+}
+#light:active {
+  background-color: rgb(31, 31, 61);
+}
+
+/* Menu */
+#menubox {
+  overflow-y: auto;
+}
+nav {
+  position: fixed;
+  width: 310px;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  border: 2px solid;
+  overflow-y: auto;
+}
+nav ul {
+  padding: 0;
+}
+nav li {
+  list-style: none;
+  padding: 0;
+}
+nav a {
+  text-decoration: none;
+  display: block;
+}
+
+/* General home */
+main, footer {
+  margin-left: 310px;
+  flex: 1;
+  padding: 20px;
+}
 #testtitle {
-  font-size: 75px;
   font-weight: 900;
   color: rgb(255, 0, 0);
-  background-color: hsl(0, 0%, 85%);
   font-family: 'Michroma';
-  text-align: center;
-  border: 2px solid;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 5px 5px 5px hsla(0, 0%, 40%, 0.2);
-  animation-name: Three_Dimentional_Spin;
+  text-align: left;
+  /*  animation-name: Three_Dimentional_Spin;
   animation-timing-function: linear;
   animation-duration: 5s;
   animation-delay: 0s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: infinite;*/
 }
+#introtitle {
+  font-family: monospace;
+  font-size: 25px;
+}
+
+/* Installation (Neovim) */
+.nvimcodeinstallation {
+  background-color: hsl(0, 0%, 30%);
+  color: white;
+}
+.c {
+  margin-right: 50px;
+  width: 80px;
+}
+.c:hover {
+  background-color: hsl(0, 0%, 20%);
+}
+.c:active {
+  background-color: hsl(0, 0%, 10%);
+}
+/* Animations and other things */
 @keyframes Three_Dimentional_Spin {
-  100%{transform: rotate3d(0, 1, 0, 360deg);}
+  100% {
+    transform: rotate3d(0, 1, 0, 360deg);
+  }
 }

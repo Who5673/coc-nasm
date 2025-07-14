@@ -21,7 +21,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 # coc-nasm
-__coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one of the plugin for Netwide Assembler (nasm) programing. In fact, Assembly Languages and Assemblers have few plugins for coding, but that does not mean we do not have any of them to support us.  
+__coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one of the plugin for Netwide Assembler (NASM) programing. In fact, Assembly Languages and Assemblers have few plugins for coding, but that does not mean we do not have any of them to support us.  
   
 ## Install coc-nasm:
 ```
@@ -33,8 +33,6 @@ https://who5673.github.io/coc-nasm/
 ```
 As I have a problem with python3-flask and GitHub pages, I cannot build this website now.  
 __However__, I still have some website goals:
-- Have backend (cannot build now) and frontend.
-- Build the website using WebAssembly (WASM) and Netwide Assembler.
 
 ## About coc-nasm
 - Manufacturing date: The 6^th of July, 2025 (7/6/2025 - mm/dd/yy).
@@ -45,6 +43,7 @@ __However__, I still have some website goals:
 - Netwide Assembler does have a lack of good plugins for snippets and auto-completions so that is why coc-nasm needs to be invented.
 - coc-nasm has snippets and auto-completions for NASM, but note: This plugin does not support syntax highlighting. You may need them by installing third-party plugins for NASM. Fortunately, vim supports syntax highlighting for that language.
 - If you have any problem about this plugin, please fix it by yourself as this product is __NO WARRANTY__. However, I will tell you that my contact information is in contact.txt in GitHub repository.
+- **Suggested version**: 0.2.7
 
 ## Dependencies
 Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you also can install them from coc.nvim.
@@ -92,6 +91,8 @@ Therefore, I am not going to make a Language Server Protocol (LSP), formatters, 
 ___Would you like to write more plugins for programming Assembler languages in the world?___  
 - Please answer my question in your mind and come up with your idea if you can. You do not need to send that idea to me.  
   
+## See also 
+[`who5673-nasm`](https://github.com/Who5673/who5673-nasm) - A plugin which has the benefit is almost like this plugin but for `lazy.nvim`
 Thank you for using my coc-nasm plugin so much.  
   
 <hr />
