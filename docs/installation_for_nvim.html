@@ -2,15 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <title>Installation in Neovim</title>
     <meta name="viewport" content="width=device-width">
     <!--link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="{{ url_for('static', filename='bridge.js') }}"></script>
     <script src="{{ url_for('static', filename='frontend.js') }}"></script-->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="coc-nasm-favison.svg" sizes="48x48">
+
+    <!--Highlighter scripts-->
+    <link rel="stylesheet" href="highlighters/luahighlight/styles/github-dark.min.css">
+    <link rel="stylesheet" href="highlighters/x86asmhighlighters/styles/github-dark.min.css">
+
+    <!--WebAssembly-->
     <script src="bridge.js"></script>
-    <!--link rel="shortcut icon" href="favicon.ico" type="image/x-icon"-->
-    <title>Installation in Neovim</title>
   </head>
   <body id="bodie">
     <header>
@@ -33,6 +38,13 @@
       <section>
         <h1 id="testtitle">Installation in Neovim</h1>
       </section>
+      <p class="nviminstallationpassage">Our packages not only has <code>coc-nasm</code> for coc.nvim, but we also has <code>who5673-nasn</code>for Lazy.nvim Plugin Manager.</p>
+      <p class="nviminstallationpassage">To install <code>who5673-nasm</code>, please do the steps like this instructions:</p>
+      <h2 class="nviminstallationpassage"><b>Step 1. Install <code>who5673-nasm</code></b> using Neovim configurations</h2>
+      <p class="nviminstallationpassage">You may need to make some new directories and files if you do not have.</p>
+      <!--JavaScript's copy clipboard-->
+      <code class="path"><b>$HOME/.config/nvim/lua/plugins/init.lua</b> or <b>$HOME/.config/nvim/lua/plugins/who5673-nasm.lua</b></code>
+      <p class="c3">Lua</p>
       <section class="nvimcodeinstallation">
         <div class="c">
           <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn">Copy</p>
@@ -49,6 +61,13 @@ return {
 },      </code>
   </pre>
       </section>
+      <h2 class="nviminstallationpassage" class="headernvim">Step 2. Configure cmp.lua for <code>who5673-nasm</code></h2>
+      <p class="nviminstallationpassage">
+        I do not want to instruct you how to install <code>nvim-cmp</code> as it is not my own plugin.
+        However, to make sure you have configured my plugin, reading this script is recommended.
+      </p>
+      <p class="path"><b>$HOME/.config/nvim/lua/plugins/cmp.lua</b></p>
+      <p class="c3">Lua</p>
       <section class="nvimcodeinstallation">
         <div class="c">
           <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
@@ -93,7 +112,112 @@ return {
   },
 }</code>
   </pre>
+
+
+      <!--Frontend-->
       </section>
+      <h2 class="nviminstallationpassage" class="headernvim">Setup your first program using our plugins</h2>
+      <p class="nviminstallationpassage">Exit Neovim or set the filetype into Netwide Assembler filetype</p>
+      <p class="c3">Vimscript</p>
+      <section class="nvimcodeinstallation">
+        <div class="c">
+          <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
+        </div>
+        <pre><code class="codeblock">
+:set ft=nasm</code></pre>
+      </section>
+      <p class="nviminstallationpassage">or if you want to create a new file, execute:</p>
+      <p class="c3">sh Shell</p>
+      <section class="nvimcodeinstallation">
+        <div class="c">
+          <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
+        </div>
+        <pre><code class="codeblock">
+nvim main.nasm</code></pre>
+      </section>
+      <p class="nviminstallationpassage">Then type:</p>
+      <p class="c3">Plaintext</p>
+      <section class="nvimcodeinstallation">
+        <div class="c">
+          <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
+        </div>
+        <pre><code class="codeblock">
+printHello
+</code></pre>
+      </section>
+
+      <p class="nviminstallationpassage">
+        or <code>ph, pH,...</code>anything that relates to snippet <code>printHello</code>.</p>
+      <p class="nviminstallationpassage">
+        It should output this script after choosing:
+      </p>
+
+
+      <p class="c3">NASM</p>
+      <section class="nvimcodeinstallation">
+        <div class="c">
+          <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
+        </div>
+        <pre><code class="codeblock">
+section .data
+  msg db "Hello world", 0xA
+  len equ $-msg
+
+section .text
+  global _start
+
+_start:
+  mov rax, 1
+  mov rdi, 1
+  mov rsi, msg
+  mov rdx, len
+  syscall
+
+  mov rax, 60
+  mov rdi, |       ; Your cursor is |
+  syscall
+</code></pre>
+      </section>
+      <h2 class="nviminstallationpassage">Compile your first NASM program into a binary</h2>
+      <h3 class="nviminstallationpassage">For Linux:</h3>
+      <p class="nviminstallationpassage">Install <code>nasm</code> compiler if you do not have:</p>
+      <p class="c3">sh Shell</p>
+      <section class="nvimcodeinstallation">
+        <div class="c">
+          <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
+        </div>
+        <pre><code class="codeblock">
+sudo apt install nasm --yes</code></pre>
+      </section>
+
+      <p class="nviminstallationpassage">Then use <code>nasm</code> to compile your Netwide Assembler file:</p>
+      <p class="c3">sh Shell</p>
+      <section class="nvimcodeinstallation">
+        <div class="c">
+          <p class="c2"><img src="clipboard.svg" alt="" class="copy-btn"> Copy</p>
+        </div>
+        <pre><code class="codeblock">
+nasm -f elf64 main.nasm -o main.o    # Compile NASM file into an object file using specified format
+ld main.o -o main   # Like the object file to the binary, then make a binary file
+</code></pre>
+      </section>
+      <p class="nviminstallationpassage"><b>Attention:</b> You need to choose right format type in order to make the binary work.</p>
+      <p class="nviminstallationpassage">According to <code>nasm</code> manpage, we have some format like this:</p>
+      <ul class="nviminstallationpassage">
+        <li class="nviminstallationpassage"><b><code>win32</code></b>: For Windows 32-bit</li>
+        <li class="nviminstallationpassage"><b><code>win64</code></b>: For Windows 64-bit</li>
+        <li class="nviminstallationpassage"><b><code>elf32</code></b>: For x86 Linux distros (32-bit)</li>
+        <li class="nviminstallationpassage"><b><code>elf64</code></b>: For x86-64 Linux distros (64-bit)</li>
+      </ul>
+
+
+      <!--Highlighter scripts-->
+      <script src="highlighters/luahighlight/highlight.min.js"></script>
+      <script src="highlighters/bashhighlight/languages/bash.min.js"></script>
+      <script src="highlighters/vimhighlight/languages/vim.min.js"></script>
+      <script src="highlighters/luahighlight/languages/lua.min.js"></script>
+      <script src="highlighters/x86asmhighlighters/languages/x86asm.min.js"></script>
+      <script>hljs.highlightAll();</script>
       <script src="frontend.js"></script>
     </main>
     <footer>
@@ -104,5 +228,16 @@ return {
         <a style="font-weight: 400; font-family: Arial, Helvetica, sans-serif;" href="../LICENSE">MIT</a>
       </section>
     </footer>
+    <script>
+      /* JavaScript's Copy Clipboard */
+      let cpclipbd = document.querySelectorAll(".c2");
+      cpclipbd.forEach((btn, idx) => {
+        btn.addEventListener("click", () => {
+          const code = document.querySelectorAll(".codeblock")[idx].textContent;
+          let cpresult = navigator.clipboard.writeText(code);
+          cpresult.then(() => window.alert("Copied")).catch(() => alert("Error while copying"));
+        });
+      });
+    </script>
   </body>
 </html>

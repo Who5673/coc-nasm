@@ -5,10 +5,16 @@
   font-weight: normal;
   font-size: normal;
 }
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('RobotoMono/RobotoMono-Regular.ttf');
+  font-weight: normal;
+  font-size: normal;
+}
 
 /* Background configuration */
 body {
-  background-color: hsl(0, 0%, 50%);
+  background-color: hsl(0, 0%, 30%);
 }
 body.light {
   background-color: hsl(0, 0%, 100%);
@@ -16,7 +22,8 @@ body.light {
 #light {
   background-color: blue;
   border: 1px solid;
-  box-shadow: -4px 4px 4px hsl(0, 4%, 24%);
+  border-radius: 10px;
+  box-shadow: -4px 4px 4px hsl(0, 2%, 8%);
 }
 #light:hover {
   background-color: rgb(34, 34, 110);
@@ -36,19 +43,37 @@ nav {
   box-sizing: border-box;
   padding: 20px;
   display: flex;
-  border: 2px solid;
+  border-left: 5px solid;
+  border-color: white;
+  border-radius: 1px;
   overflow-y: auto;
+}
+nav.light{
+  border-color: #000000;
 }
 nav ul {
   padding: 0;
 }
 nav li {
   list-style: none;
+  font-family: monospace;
+  font-size: 15px;
   padding: 0;
 }
+nav li:nth-child(n){
+  margin-top: 10px;
+}
 nav a {
+  color: black;
+  font-weight: 900;
   text-decoration: none;
   display: block;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+nav a:active {
+  color: red;
 }
 
 /* General home */
@@ -72,13 +97,70 @@ main, footer {
   font-family: monospace;
   font-size: 25px;
 }
+.thirdlinks {
+  text-decoration: none;
+  color: yellow;
+}
+/* Huperlink boxes */
+.box {
+  box-sizing: border-box;
+  box-shadow: -7px 7px 7px hsla(0, 0%, 100%, 98%);
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  border: 3px solid;
+}
+.box:hover {
+  animation: push 0.5s ease-out 0s forwards, rainbow 1.5s linear 0s infinite;
+}
+.box:nth-child(n) {
+  margin-top: 20px;
+}
+.subbox {
+  color: rgba(0, 255, 0, 98%);
+  background: transparent;
+  box-shadow: 0px 0.5px 0.5px hsl(0, 0%, 80%);
+  padding: 7px;
+  border-radius: 10px;
+  font-family: 'RobotoMono';
+}
+.subbox:nth-child(2n){
+  text-align: left;
+}
+/* Getlink button */
+.getlinknow {
+  margin-top: 15px;
+  width: 100px;
+  background: transparent;
+  border: 2px solid;
+  border-color: blue;
+  border-radius: 8px;
+  color: white;
+}
+.getlinknow:hover {
+  background-color: yellow;
+  color: black;
+}
+.getlinknow:active {
+  background-color: rgb(180, 180, 29);
+}
+
 
 /* Installation (Neovim) */
+.nviminstallationpassage {
+  font-family: sans-serif;
+  font-size: 20px;
+}
+.path {
+  font-family: monospace;
+  font-size: 25px;
+}
 .nvimcodeinstallation {
-  background-color: hsl(0, 0%, 30%);
+  background-color: #0d1117;
   color: white;
 }
 .c {
+  font-family: sans-serif;
   margin-right: 50px;
   width: 80px;
 }
@@ -88,9 +170,32 @@ main, footer {
 .c:active {
   background-color: hsl(0, 0%, 10%);
 }
+.c3 {
+  font-weight: 900;
+  font-family: sans-serif;
+  color: hsl(0, 0%, 100%);
+  text-align: right;
+  margin-bottom: -45px;
+  margin-right: 10px;
+}
 /* Animations and other things */
 @keyframes Three_Dimentional_Spin {
   100% {
     transform: rotate3d(0, 1, 0, 360deg);
   }
+}
+@keyframes push {
+  100% {
+    box-shadow: 0px 0px 0px;
+  }
+}
+@keyframes rainbow {
+    0%{border-color: red}
+    14%{border-color: orange}
+    29%{border-color: yellow}
+    43%{border-color: rgb(11, 236, 11)}
+    57%{border-color: rgb(0, 195, 255)}
+    72%{border-color: rgb(17, 14, 240)}
+    86%{border-color: rgb(255, 0, 149)}
+    100%{border-color: red}
 }
