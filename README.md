@@ -2,6 +2,8 @@
 coc-who5673-nasm - A coc.nvim plugin that is open source for programing NASM Language.
 Copyright © 2025 who5673. All rights served.
 
+The MIT License
+
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
@@ -31,12 +33,11 @@ __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one
 ```
 https://who5673.github.io/coc-nasm/
 ```
-As I have a problem with python3-flask and GitHub pages, I cannot build this website now.  
-__However__, I still have some website goals:
+This website is under construction.  
 
 ## About coc-nasm
-- Manufacturing date: The 6^th of July, 2025 (7/6/2025 - mm/dd/yy).
-- Reddit publish date: The 7^th of July, 2025 (7/6/2025 - mm/dd/yy).
+- Manufacturing date: The 6<sup>th</sup> of July, 2025 (7/6/2025 - mm/dd/yy).
+- Reddit publish date: The 7<sup>th</sup> of July, 2025 (7/7/2025 - mm/dd/yy).
 - This package is under MIT License, open-source.
 - Maybe it is not the first Netwide Assembler plugin for auto-completion and snippet in the world.
 - __However__, it is one of the **strong** plugin for NASM.
@@ -99,3 +100,6 @@ Thank you for using my coc-nasm plugin so much.
 Copyright &copy; by who5673. All rights served.  
   
 This is an official coc.nvim plugin for NASM (made by who5673).  
+
+## License
+MIT
