@@ -1,4 +1,4 @@
-import { 
+import {
   ExtensionContext,
   languages,
   CompletionItem,
@@ -40,7 +40,8 @@ const nasmInstructions: [string, string][] = [
   ['add', 'Add an integer value into a variable/label.\nExample: add rax, 5'],
   ['sub', 'Subtract an integer value into a variable/label.\nExample: sub rax, 2'],
   ['mul', 'Multiply'],
-  ['div', 'Divide'],
+  ['div', 'Divide (unsigned) 2 numbers'],
+  ['idiv', 'Divide (signed) 2 numbers'],
   ['int', 'Interrupt'],
   ['ret', 'Return from procedure'],
   ['push', 'Push to stack'],
@@ -82,32 +83,32 @@ const nasmInstructions: [string, string][] = [
   ['setnz', 'Isn\'t that value/comparison equal to 0?\nZF = 0 (setne)'],
   ['setp', 'Parity even bit memory?\nPF = 1'],
   ['setnp', 'Parity odd bit memory?\nPF = 0'],
-  
+
   // Registers:
   // 64-bit:
   ['rax', 'Register RAX'], ['rbx', 'Register RBX'], ['rcx', 'Register RCX'], ['rdx', 'Register RDX'],
   ['rsi', 'Register RSI'], ['rdi', 'Register RDI'], ['rsp', 'Register RSP'], ['rbp', 'Register RBP'],
-  ['r8',  'Register R8'],  ['r9',  'Register R9'],  ['r10', 'Register R10'], ['r11', 'Register R11'],
+  ['r8', 'Register R8'], ['r9', 'Register R9'], ['r10', 'Register R10'], ['r11', 'Register R11'],
   ['r12', 'Register R12'], ['r13', 'Register R13'], ['r14', 'Register R14'], ['r15', 'Register R15'],
 
   // 32-bit
   ['eax', 'Register EAX'], ['ebx', 'Register EBX'], ['ecx', 'Register ECX'], ['edx', 'Register EDX'],
   ['esi', 'Register ESI'], ['edi', 'Register EDI'], ['esp', 'Register ESP'], ['ebp', 'Register EBP'],
-  ['r8d', 'Register R8D'], ['r9d', 'Register R9D'], ['r10d','Register R10D'],['r11d','Register R11D'],
-  ['r12d','Register R12D'],['r13d','Register R13D'],['r14d','Register R14D'],['r15d','Register R15D'],
+  ['r8d', 'Register R8D'], ['r9d', 'Register R9D'], ['r10d', 'Register R10D'], ['r11d', 'Register R11D'],
+  ['r12d', 'Register R12D'], ['r13d', 'Register R13D'], ['r14d', 'Register R14D'], ['r15d', 'Register R15D'],
 
   // 16-bit
   ['ax', 'Register AX'], ['bx', 'Register BX'], ['cx', 'Register CX'], ['dx', 'Register DX'],
   ['si', 'Register SI'], ['di', 'Register DI'], ['sp', 'Register SP'], ['bp', 'Register BP'],
-  ['r8w', 'Register R8W'], ['r9w', 'Register R9W'], ['r10w','Register R10W'],['r11w','Register R11W'],
-  ['r12w','Register R12W'],['r13w','Register R13W'],['r14w','Register R14W'],['r15w','Register R15W'],
+  ['r8w', 'Register R8W'], ['r9w', 'Register R9W'], ['r10w', 'Register R10W'], ['r11w', 'Register R11W'],
+  ['r12w', 'Register R12W'], ['r13w', 'Register R13W'], ['r14w', 'Register R14W'], ['r15w', 'Register R15W'],
 
   // 8-bit (High and Low)
   ['al', 'Register AL'], ['ah', 'Register AH'], ['bl', 'Register BL'], ['bh', 'Register BH'],
   ['cl', 'Register CL'], ['ch', 'Register CH'], ['dl', 'Register DL'], ['dh', 'Register DH'],
-  ['spl','Register SPL'], ['bpl','Register BPL'], ['sil','Register SIL'], ['dil','Register DIL'],
-  ['r8b', 'Register R8B'], ['r9b', 'Register R9B'], ['r10b','Register R10B'],['r11b','Register R11B'],
-  ['r12b','Register R12B'],['r13b','Register R13B'],['r14b','Register R14B'],['r15b','Register R15B'],
+  ['spl', 'Register SPL'], ['bpl', 'Register BPL'], ['sil', 'Register SIL'], ['dil', 'Register DIL'],
+  ['r8b', 'Register R8B'], ['r9b', 'Register R9B'], ['r10b', 'Register R10B'], ['r11b', 'Register R11B'],
+  ['r12b', 'Register R12B'], ['r13b', 'Register R13B'], ['r14b', 'Register R14B'], ['r15b', 'Register R15B'],
 
   // Segment Registers
   ['cs', 'Register CS (Code Segment)'], ['ds', 'Register DS (Data Segment)'],
