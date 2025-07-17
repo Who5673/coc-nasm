@@ -31,7 +31,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
 const nasmInstructions: [string, string][] = [
   ['default', 'This code must be at the first line of the script if you combine with rel in order to compile using gcc/g++ if you extern this from C/C++.'],
   ['neg', 'neg command - compute the absolute value (abs) of a register'],
-  ['rel', 'rel command'],
+  ['rel', 'rel command in order to use a relative address of something'],
+  ['byte', 'Use this to work with bytes. You can cmp byte using this (example: cmp byte [rdi + rcx], 0).'],
   ['mov', 'Move data from source to destination (mov [dst], [src])'],
   ['lea', 'lea command to work with memory'],
   ['rep', 'Repeat string operation'],
