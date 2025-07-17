@@ -1,0 +1,408 @@
+#!/usr/bin/env python3
+from itertools import chain
+from rich.traceback import install as inst; inst()
+from argparse import ArgumentParser
+from os import system as s
+from os import remove
+from ast import literal_eval
+from os.path import isfile
+
+# Parsers for arguments
+parser = ArgumentParser(description="Compile NASM into WASM")
+parser.add_argument('-i', '--input', type=str, help="Input a NASM file to compile")
+parser.add_argument('-o', '--output', type=str, help="Specify the output file after compiling")
+args = parser.parse_args()
+
+
+# Registers
+# 64-bit registers
+reg64 = [
+    'rax', 'rbx', 'rcx', 'rdx',
+    'rsi', 'rdi', 'rsp', 'rbp',
+    'r8', 'r9', 'r10', 'r11',
+    'r12', 'r13', 'r14', 'r15'
+]
+# 32-bit registers
+reg32 = [
+    'eax', 'ebx', 'ecx', 'edx',
+    'esi', 'edi', 'esp', 'ebp',
+    'r8d', 'r9d', 'r10d', 'r11d',
+    'r12d', 'r13d', 'r14d', 'r15d'
+]
+# 16-bit registers
+reg16 = [
+    'ax', 'bx', 'cx', 'dx',
+    'si', 'di', 'sp', 'bp',
+    'r8w', 'r9w', 'r10w', 'r11w',
+    'r12w', 'r13w', 'r14w', 'r15w'
+]
+# 8-bit registers (high and low)
+reg8 = [
+    'al', 'ah', 'bl', 'bh',
+    'cl', 'ch', 'dl', 'dh',
+    'sil', 'dil', 'spl', 'bpl',
+    'r8b', 'r9b', 'r10b', 'r11b',
+    'r12b', 'r13b', 'r14b', 'r15b'
+]
+# Segment registers
+seg_regs = [
+    'cs', 'ds', 'ss', 'es',
+    'fs', 'gs'
+]
+# All registers
+reg = list(chain(reg64, reg32, reg16, reg8, seg_regs))
+
+
+# Exceptions
+class WrongFileTypeError(BaseException):
+    def __init__(self, m=None):
+        if m is None:
+            m = "The included filetype must be a Netwide Assembler (.nasm) or Assembly (.asm) file"
+        super().__init__(m)
+class NASMSyntaxError(BaseException):
+    def __init__(self, m=None):
+        if m is None:
+            m = "Syntax error in NASM detected!"
+        super().__init__(m)
+
+# Check file off if it is such file or directory, and it is a .nasm or .asm file
+def checkfile(file):
+    if ".nasm" not in file:
+        if ".asm" in file: 
+            pass
+        elif not isfile(file):
+            raise FileNotFoundError(f"{file}: No such file or directory")
+        else:
+            raise WrongFileTypeError
+    
+    if not isfile(file):
+        raise FileNotFoundError(f"{file}: No such file or directory")
+    
+    file2 = file
+    file = list(file)
+    for i in range(-1, -6, -1):
+        file.pop(-1)
+        if i == -4 and ".nasm" not in file2:
+            break
+    file = ''.join(file)
+
+# Check the output if it is a WebAssembly Binary file
+def checkoutputfile(file):
+    if ".wasm" not in file and ".wat" not in file:
+        raise WrongFileTypeError("Output filetype must be a WebAssembly Text file (.wat) or WebAssembly binary file (.wasm)")
+    else: pass
+
+# Main function for compiling NASM to WASM
+def wasm_compile(inputfile, outputfile):
+    def nasm_to_wat(nasm_lines):
+        in_data = False
+        label_offset_map = {}
+        next_offset = 1024
+        data_section = []
+        equ_macros = {}
+        data_labels = {}
+        text_section = []
+        wat_lines = ['(module\n  (memory (export "memory") 1)']
+        func_name = ""
+        params = set()
+        locals_ = set()
+        body = []
+
+        for line in nasm_lines:
+            stripped = line.strip()
+            if not stripped:
+                continue
+
+            if stripped.startswith("section .data"):
+                in_data = True
+                continue
+
+            elif stripped.startswith("section .text"):
+                in_data = False
+                continue
+
+            if in_data:
+                data_section.append(stripped)
+            else:
+                text_section.append(stripped)
+
+            for line in data_section:
+                if not line or line.startswith(";"):
+                    continue
+                # Deal with equ
+                if "equ" in line:
+                    parts = line.split()
+                    equ_macros[parts[0]] = parts[2]
+                    continue
+                # Example: msg db "Hello", 0
+                if "db" in line or "dd" in line:
+                    label, rest = line.split(None, 1)
+                    label = label.rstrip(":")
+                    if "db" in rest:
+                        value = rest.split("db", 1)[1].strip()
+                        if value.startswith('"'):
+                            try:
+                                s = literal_eval(value)
+                                if isinstance(s, str):
+                                    b = s.encode("utf-8") + b"\x00"
+                                else:
+                                    raise ValueError("Not a string")
+                            except Exception as e:
+                                print("String parse failed:", e)
+                                b = b""
+                        else:
+                            b = bytes([int(v.strip()) for v in value.split(",")])
+                    elif "dd" in rest:
+                        nums = [int(v.strip(",")) for v in rest.split("dd", 1)[1].split(",")]
+                        b = b''.join(int(n).to_bytes(4, 'little') for n in nums)
+                    else:
+                        continue
+
+                    data_labels[label] = {
+                        "offset" : next_offset,
+                        "bytes" : b
+                    }
+                    next_offset += len(b)
+
+            for labal, val in data_labels.items():
+                data_bytes = val["bytes"].decode("latin1") # Keep the bytes
+                wat_lines.append(f'  (data (i32.const {val["offset"]}) "{data_bytes}")')
+
+            if stripped.startswith("global"):
+                func_name = stripped.split()[1]
+                continue
+
+            if stripped.endswith(":"):
+                label = stripped[:-1]
+                if label == func_name:
+                    func_signature = f'  (func ${label}'
+                else:
+                    body.append(f'  ;; Label ${label} (không phải entrypoint)')
+                continue
+
+            if stripped.startswith("mov"):
+                _, dst, src = stripped.split()
+                dst = dst.rstrip(',').lower()
+                src = src.lower()
+
+                if dst in reg64:
+                    locals_.add(dst)
+                if src in reg64 and src not in locals_:
+                    params.add(src)
+
+                if src in reg64:
+                    body.append(f'    local.get ${src}')
+                else:
+                    body.append(f'    i32.const {src}')
+                body.append(f'    local.set ${dst}')
+                continue
+
+            if stripped.startswith("add"):
+                _, dst, src = stripped.split()
+                dst = dst.rstrip(',').lower()
+                src = src.lower()
+
+                if dst in reg64:
+                    locals_.add(dst)
+                if src in reg64 and src not in locals_:
+                    params.add(src)
+
+                body.append(f'    local.get ${dst}')
+                if src in reg64:
+                    body.append(f'    local.get ${src}')
+                else:
+                    body.append(f'    i32.const {src}')
+                body.append(f'    i32.add')
+                body.append(f'    local.set ${dst}')
+                continue
+
+            if stripped.startswith("sub"):
+                _, dst, src = stripped.split()
+                dst = dst.rstrip(',').lower()
+                src = src.lower()
+
+                if dst in reg64:
+                    locals_.add(dst)
+                if src in reg64 and src not in locals_:
+                    params.add(src)
+
+                body.append(f'    local.get ${dst}')
+                if src in reg64:
+                    body.append(f'    local.get ${src}')
+                else:
+                    body.append(f'    i32.const {src}')
+                body.append(f'    i32.sub')
+                body.append(f'    local.set ${dst}')
+                continue
+
+            if stripped.startswith("mul"):
+                _, dst, src = stripped.split()
+                dst = dst.rstrip(',').lower()
+                src = src.lower()
+
+                if dst in reg64:
+                    locals_.add(dst)
+                if src in reg64 and src not in locals_:
+                    params.add(src)
+
+                body.append(f'    local.get ${dst}')
+                if src in reg64:
+                    body.append(f'    local.get ${src}')
+                else:
+                    body.append(f'    i32.const {src}')
+                body.append(f'    i32.mul')
+                body.append(f'    local.set ${dst}')
+                continue
+
+            if stripped.startswith("div"):
+                _, dst, src = stripped.split()
+                dst = dst.rstrip(',').lower()
+                src = src.lower()
+
+                if dst in reg64:
+                    locals_.add(dst)
+                if src in reg64 and src not in locals_:
+                    params.add(src)
+
+                body.append(f'    local.get ${dst}')
+                if src in reg64:
+                    body.append(f'    local.get ${src}')
+                else:
+                    body.append(f'    i32.const {src}')
+                body.append(f'    i32.div_u')
+                body.append(f'    local.set ${dst}')
+                continue
+
+            if stripped.startswith("idiv"):
+                _, dst, src = stripped.split()
+                dst = dst.rstrip(',').lower()
+                src = src.lower()
+
+                if dst in reg64:
+                    locals_.add(dst)
+                if src in reg64 and src not in locals_:
+                    params.add(src)
+
+                body.append(f'    local.get ${dst}')
+                if src in reg64:
+                    body.append(f'    local.get ${src}')
+                else:
+                    body.append(f'    i32.const {src}')
+                body.append(f'    i32.div_s')
+                body.append(f'    local.set ${dst}')
+                continue
+
+            if "lea" in line:
+                _, dst, src = line.split()
+                src_label = src.strip("[]").lower()
+                addr = data_labels.get(src_label, {}).get("offset", 0)
+                body.append(f'    i32.const {addr}')
+                body.append(f'    local.set ${dst}')
+                continue
+            
+            if "equ" in line and ("$ -" in line or "$-" in line):
+                name, _, expr = line.partition(" equ")
+                if "$ -" in line:
+                    base_label = expr.split("S -")[-1].strip()
+                if "$-" in line:
+                    base_label = expr.split("S-")[-1].strip()
+                base_offset = data_labels.get(base_label, {}).get("offset", 0)
+                length = next_offset - base_offset
+                equ_macros[name.strip()] = str(length)
+                continue
+
+            # chưa hỗ trợ
+            body.append(f'    ;; {stripped}')
+
+        # Tạo chữ ký hàm đầy đủ
+        if func_name:
+            for p in sorted(params):
+                func_signature += f' (param ${p} i32)'
+            if 'rax' not in params and 'rax' in locals_:
+                # Start signing
+                func_signature_parts = [f'  (func ${func_name}']
+                # Add param
+                for p in sorted(params):
+                    func_signature_parts.append(f'(param ${p} i32)')
+                # Add result
+                func_signature_parts.append('(result i32)')
+                # Add local
+                for l in sorted(locals_):
+                    if l not in params:
+                        func_signature_parts.append(f'(local ${l} i32)')
+                func_signature = ''.join(func_signature_parts)
+
+            wat_lines.append(func_signature)
+            wat_lines.extend(body)
+            wat_lines.append(f'    local.get $rax')
+            wat_lines.append(f'    return')
+            wat_lines.append(f'  )')
+            wat_lines.append(f'  (export "{func_name}" (func ${func_name}))')
+
+        wat_lines.append(')')
+        return wat_lines
+    try:
+        checkfile(inputfile)
+        checkoutputfile(outputfile)
+        outputname = list(outputfile)
+        for i in range(-1, -6, -1):
+            outputname.pop(-1)
+            if i == -3 and "." in outputname[-1]: 
+                outputname.pop(-1)
+                break
+        outputname = ''.join(outputname)
+        exportscript = rf"""export async function loadWasm() {{
+    // Load WebAssembly normal functions:
+    const response = await fetch("{outputfile}");
+    const bytes = await response.arrayBuffer();
+    const result = await WebAssembly.instantiate(bytes);
+    return result.instance;
+}}
+""" # exportscript to export WebAssembly file from JavaScript.
+
+        with open(inputfile) as f:
+            nasm_lines = f.readlines()
+            wat_lines = nasm_to_wat(nasm_lines)
+            newoutputfile = f"{outputname}.wat"
+            JSoutput = f"{outputname}.js"
+            with open(f"{newoutputfile}", "w") as g:
+                g.write("\n".join(wat_lines))
+
+        if ".wat" not in outputfile:
+            s(f'wat2wasm {newoutputfile} -o {outputfile}')
+            remove(newoutputfile)
+        
+        # Take down the exportscript:
+        with open(JSoutput, "w") as fd:
+            fd.write(exportscript)
+
+    except Exception as e:
+        print("Error:", e)
+        exit(1)
+
+# Deal with arguments
+if args.input and args.output:
+    wasm_compile(f"{args.input}" ,f"{args.output}")
+elif args.input:
+    file = args.input
+    if ".nasm" not in file:
+        if ".asm" in file: pass
+        elif not isfile(file):
+            raise FileNotFoundError(f"{file}: No such file or directory")
+        else:
+            raise WrongFileTypeError
+
+    if not isfile(file):
+        raise FileNotFoundError(f"{file}: No such file or directory")
+
+    file2 = file
+    file = list(file)
+    for i in range(-1, -6, -1):
+        file.pop(-1)
+        if (".nasm" not in file2) and (i == -4):
+            break
+    file = ''.join(file)
+    wasm_compile(f"{file2}", f"{file}.wasm")
+else:
+    print("\x1b[1;35mnasm-to-wasm: \x1b[1;38;2;255;0;0mfatal error: \x1b[1;33mno input files inside -i argument (also no -i argument too)")
+    print("\x1b[1;38;2;0;0;255mHint: \x1b[1;38;2;0;255;0mTry to run 'nasm-to-wasm -h' for the instructions\x1b[0m")
