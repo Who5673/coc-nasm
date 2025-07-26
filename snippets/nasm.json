@@ -1,0 +1,1256 @@
+{
+  "mov": {
+    "prefix": "mov",
+    "body": [
+      "mov ${1:target}, "
+    ],
+    "description": "NASM mov instruction:\nmov [target], [source]"
+  },
+  "dup": {
+    "prefix": "dup",
+    "body": [
+      "dup(${0})"
+    ],
+    "description": "dup command"
+  },
+  "sum": {
+    "prefix": "sum",
+    "body": [
+      "section .text",
+      "\tglobal sum",
+      "sum:",
+      "\tmov rax, rdi   ; rax = Return value, rdi = a = argv[1]",
+      "\tadd rax, rsi   ; rsi = b = argv[2]",
+      "\tret            ; Returns rax = a + b = rdi + rsi"
+    ],
+    "description": [
+      "This is an example of a function in NASM",
+      "Note: rax = RETURN, rdi = argv[1], rsi = argv[2], rdx = argv[3], rcx = argv[4],",
+      "r8 = argv[5], r9 = argv[6]"
+    ]
+  },
+  "equal to a len of a string": {
+    "prefix": "const",
+    "body": [
+      "equ $-${stringlabelname}"
+    ],
+    "description": "Calculate a length of a string. Place this thing right after you have defined byte a string value"
+  },
+  "basic pi (64-bit)": {
+    "prefix": "pi64",
+    "body": [
+      "pi dq 3.14${0}"
+    ],
+    "description": "Basic pi constant (64-bit)."
+  },
+  "basic pi (32-bit)": {
+    "prefix": "pi32",
+    "body": [
+      "pi dd 3.14${0}"
+    ],
+    "description": "Basic pi constant (32-bit)."
+  },
+  "function": {
+    "prefix": "function",
+    "body": [
+      "${1:functionname}:",
+      "\tret"
+    ],
+    "description": "This is the syntax to establish (set up) a function in nasm."
+  },
+  "newline": {
+    "prefix": "newline",
+    "body": [
+      "mov rax, 1",
+      "mov rdi, 1",
+      "mov rsi, 10",
+      "mov rdx, 1",
+      "syscall"
+    ],
+    "description": "This is a snippet for printing a newline in nasm"
+  },
+  "printHello": {
+    "prefix": "printHello",
+    "body": [
+      "%macro exit 1",
+      "\tmov rax, 60",
+      "\tmov rdi, %1",
+      "\tsyscall",
+      "%endmacro",
+      "",
+      "%macro getstr 2",
+      "\tmov rax, 1",
+      "\tmov rdi, 1",
+      "\tmov rsi, %1",
+      "\tmov rdx, %2",
+      "\tsyscall",
+      "%endmacro",
+      "",
+      "section .data",
+      "\texample db 0x1b, \"[1;38;2;255;165;0m\", \"Hello world\", 0x1b, \"[0m\", 0xA",
+      "\tlength equ $-example",
+      "",
+      "section .text",
+      "\tglobal _start",
+      "",
+      "_start:",
+      "\tgetstr example, length",
+      "\texit 0"
+    ],
+    "description": "An exaple program of Netwide Assembler language."
+  },
+  "section": {
+    "prefix": "sectionname",
+    "body": [
+      "section ${1:section}"
+    ],
+    "description": "Make a section in nasm\nmov section <section>"
+  },
+  "cmp": {
+    "prefix": "cmp",
+    "body": [
+      "cmp ${1:value1}, "
+    ],
+    "description": "Compare 2 values:\nmov [target], [source]"
+  },
+  "The start of an assembly program": {
+    "prefix": "program",
+    "body": [
+      "section .data",
+      "\t${definedata}",
+      "${0}",
+      "section .text",
+      "\tglobal _start",
+      "_start:",
+      "\t${0}"
+    ],
+    "description": "Automatically build the basical start of nasm language"
+  },
+  "exit": {
+    "prefix": "exit",
+    "body": [
+      "mov rax, 60",
+      "mov rdi, ${1:exitcode}",
+      "syscall"
+    ],
+    "description": "The code to exit the program with your custom exit code"
+  },
+  "include \"": {
+    "prefix": "include",
+    "body": [
+      "include \"${1:filepath}\""
+    ],
+    "description": "Include a Netwide Assembler file (quoted)"
+  },
+  "include": {
+    "prefix": "include",
+    "body": [
+      "include ${1:filemacro}"
+    ],
+    "description": "Include a Netwide Assembler file"
+  },
+  "depend": {
+    "prefix": "depend",
+    "body": [
+      "depend ${1:filemacro}"
+    ],
+    "description": [
+      "Do the Registration of a dependency into a file (like .d file in C)",
+      "Help the build compiler like make know that this NASM file depends on other files",
+      "Netwide Assembler does not directly act with this file, but some build system can read this information"
+    ]
+  },
+  "depend \"": {
+    "prefix": "depend",
+    "body": [
+      "depend \"${1:filepath}\""
+    ],
+    "description": [
+      "(quoted) Do the Registration of a dependency into a file (like .d file in C)",
+      "Help the build compiler like make know that this NASM file depends on other files",
+      "Netwide Assembler does not directly act with this file, but some build system can read this information"
+    ]
+  },
+  "use": {
+    "prefix": "use",
+    "body": [
+      "use ${1:smart_macro_feature}"
+    ],
+    "description": [
+      "Activate advanced macro or feature for a particular environment.",
+      "Basic syntax:",
+      "\tuse smart_macro_feature",
+      "Now, we only have some features like:",
+      "\tsmartalign: Helps `align` work smarter",
+      "\tdwarf: Allows you to generate DWARF debug logs inside ELF",
+      "\taltreg: Allows you to alternate register names",
+      "See https://www.nasm.us/vdoc/2.16.03/html/nasmdoc6.html (from nasm.us, not my website) for more information about features"
+    ]
+  },
+  "repl": {
+    "prefix": "repl",
+    "body": [
+      "repl ${1:newname}"
+    ],
+    "description": [
+      "Renaming a context",
+      "You can replace:",
+      "",
+      "%pop",
+      "%push newname",
+      "",
+      "with the non-destructive version of:",
+      "%repl newname"
+    ]
+  },
+  "pathsearch": {
+    "prefix": "pathsearch",
+    "body": [
+      "pathsearch \"${resultmacro_and_filename}\""
+    ],
+    "description": [
+      "%pathsearch: Search for a file",
+      "",
+      "Basic syntax:",
+      "%pathsearch result \"filename\"",
+      "- `result` is a single-line macro (is initialized with %$result)",
+      "- `filename` is the file you want to find",
+      "",
+      "Basic example for main.nasm:",
+      "",
+      "%pathsearch found_path, \"mymacro.inc\"",
+      "%ifdef %$found_path",
+      "\t%include %$found_path",
+      "%else",
+      "\t%error \"Error with mymacro.inc: No such file or directory\"",
+      "%endif",
+      "",
+      "Combine with argument -I to make the compiler find the path by looting in other directories. For instance:",
+      "nasm -Iincludes/ -Isrc/ main.nasm"
+    ]
+  },
+  "push": {
+    "prefix": "%push",
+    "body": [
+      "%push ${1:SOMETHING}",
+      "\t${0}",
+      "%pop"
+    ],
+    "description": [
+      "%push: Save the current stack by doing a stack push",
+      "",
+      "Basic syntax:",
+      "%push content_name   ; Name the stack content",
+      "\t%define foo 123    ; This is only an example command",
+      "\t...",
+      "%pop                 ; Recover all the previous definitions",
+      "",
+      "For instance:",
+      "",
+      "%define foo 1",
+      "",
+      "%push content",
+      "\t%define foo 42",
+      "\t; In here, foo = 42",
+      "%pop",
+      "; After poping, foo == 1",
+      "",
+      "For the more particular situation, we need to manage the content, like this:",
+      "",
+      "%macro scoped_macro 0",
+      "\t%push mscope",
+      "\t\t%define _tmp eax",
+      "\t\tmov _tmp, 0",
+      "\t%pop",
+      "%endmacro",
+      "",
+      "scoped_macro",
+      "; _tmp now does not exist anymore",
+      "",
+      "If you do not use push or pop, you can change the defined macro outside.",
+      "",
+      "%define reg eax",
+      "",
+      "%macro bad_macro 0",
+      "\t%define reg ebx  ; Will exist instantly, do not remove.",
+      "%endmacro",
+      "",
+      "bad_macro",
+      "mov reg, 1         ; Use wrong register!",
+      "",
+      "Use %push/%pop to avoid that situation.",
+      "",
+      "Attention:",
+      "%push only applies for the definition in the preprocessor: %define, %idefine, %xdefine, %assign,...",
+      "Cannot apply %push into the label inside machine codes (you need to use command `push` instead).",
+      "You can use many floors of %push if you can",
+      "",
+      "Uses in real life: %push and %pop are requied to:",
+      "- Take down DSL macros like if/else, switch/case;",
+      "- Use %define to define variables or registers;",
+      "- Automatically generate macro using script or snippets;"
+    ]
+  },
+  "arg": {
+    "prefix": "arg",
+    "body": [
+      "arg ${1:STRING} ${2:LEN}"
+    ],
+    "description": [
+      "Define arguments in `macro` command, not `%macro` preprocessor"
+    ]
+  },
+  "stacksize": {
+    "prefix": "stacksize",
+    "body": [
+      "stacksize ${1:SIZE}"
+    ],
+    "description": [
+      "Examine how many bytes are used in the macro's stack logic (not the CPU's real stack)"
+    ]
+  },
+  "local": {
+    "prefix": "local",
+    "body": [
+      "local ${1:VARIABLE}"
+    ],
+    "description": [
+      "Define local variables.",
+      "Those variables do not exist outside the macro"
+    ]
+  },
+  "pragma": {
+    "prefix": "pragma",
+    "body": [
+      "pragma ${1:NAMESPACE_COMMAND} ${2:VALUE}"
+    ],
+    "description": [
+      "Set a special options for Netwide Assembler or local plugin",
+      "Now, we have only one real namespace. It is debug",
+      "For instance:",
+      "",
+      "%pragma debug gdb    ; Turn on the output information according to the standard options of gdb",
+      "",
+      "Depending on ELF/COFF backend, %pragma may not work"
+    ]
+  },
+  "clear": {
+    "prefix": "clear",
+    "body": [
+      "clear ${1:CONTEXT} ${2:TYPE}"
+    ],
+    "description": [
+      "%clear - Clear and delete all defined single-line macros and multi-line macros, EVERY PREPROCESSOR THINGS.",
+      "Attention: This command will delete ALL EXISTED MACROS.",
+      "However, you still have options using this command."
+    ]
+  },
+  "clear all preprocessors": {
+    "prefix": "clearallpreprocessors",
+    "body": [
+      "clear global all"
+    ],
+    "description": "CLEAR ALL THE PREPROCESSORS IN THE FILE"
+  },
+  "error": {
+    "prefix": "error",
+    "body": [
+      "error \"${MESSAGE}\" "
+    ],
+    "description": "Send an error if a wrong logic has been detected while compiling"
+  },
+  "fatal": {
+    "prefix": "fatal",
+    "body": [
+      "fatal \"${MESSAGE}\""
+    ],
+    "description": "Like error, but stop instantly like panic, which is a very serious error which forces the compiler to stop compiling"
+  },
+  "warning": {
+    "prefix": "warning",
+    "body": [
+      "error \"${MESSAGE}\""
+    ],
+    "description": [
+      "Send a warning to notice developers that something might happend while running this script.",
+      "However, the compiler still carries on compiling the source code."
+    ]
+  },
+  "pop": {
+    "prefix": "pop",
+    "body": [
+      "%pop"
+    ],
+    "description": [
+      "%pop: Recover the previous stack by doing a stack pop"
+    ]
+  },
+  "jge": {
+    "prefix": "jge",
+    "body": [
+      "jge ${1:label}"
+    ],
+    "description": "Jump to a label if in cmp, the previous label is greater than or equal to the target value"
+  },
+  "jmp": {
+    "prefix": "jmp",
+    "body": [
+      "jmp ${1:label}"
+    ],
+    "description": "Jump to a label without any conditions"
+  },
+  "jne": {
+    "prefix": "jne",
+    "body": [
+      "jne ${1:label}"
+    ],
+    "description": "Jump to a label if in cmp, the previous label is not equal to the target value"
+  },
+  "je": {
+    "prefix": "je",
+    "body": [
+      "je ${1:label}"
+    ],
+    "description": "Jump to a label if in cmp, the previous label is equal to the target value"
+  },
+  "jle": {
+    "prefix": "jle",
+    "body": [
+      "jle ${1:label}"
+    ],
+    "description": "Jump to a label if in cmp, the previous label is lower than or equal to the target value"
+  },
+  "jg": {
+    "prefix": "jg",
+    "body": [
+      "jg ${1:label}"
+    ],
+    "description": "Jump to a label if in cmp, the previous label is greater than the target value"
+  },
+  "jl": {
+    "prefix": "jl",
+    "body": [
+      "jl ${1:label}"
+    ],
+    "description": "Jump to a label if in cmp, the previous label is lower than the target value"
+  },
+  "call": {
+    "prefix": "call",
+    "body": [
+      "call ${functionname}"
+    ],
+    "description": "call a function"
+  },
+  "Basic script for outputing a variable/label": {
+    "prefix": "basicoutput",
+    "body": [
+      "mov rax, 1",
+      "mov rdi, 1",
+      "mov rsi, ${messagevalue}",
+      "mov rdx, ${len}",
+      "syscall"
+    ],
+    "description": "This script shows how to print a label basically"
+  },
+  "Basic script for inputing a variable/label": {
+    "prefix": "basicinput",
+    "body": [
+      "mov rax, 0",
+      "mov rdi, 0",
+      "mov rsi, ${buffervariable}   ; ",
+      "mov rdx, 30",
+      "syscall"
+    ],
+    "description": "This script shows how to make a user input by reading the sidin.\nYou must make an uninitialized memory using section .bss and resb first"
+  },
+  "enter": {
+    "prefix": "enter",
+    "body": [
+      "enter ${1:imm16} ${2:imm8}",
+      "",
+      "leave"
+    ],
+    "description": [
+      "This command establishes a stack frame",
+      "",
+      "Basic syntax:",
+      "\tenter imm16, imm8",
+      "\tleave",
+      "",
+      "`enter` configures the stack frame, with:",
+      "\t imm16 is bytes need providing for the local variable",
+      "\t imm8 is the nesting level (rarely used, the default is 0)",
+      "For example:",
+      "",
+      "enter 32, 0    ; Is equal to `push rbp`",
+      "mov rbp, rsp",
+      "sub rsp, 32    ; Provide 32 bytes for the local variable",
+      "leave          ; We will tell you about this command right later",
+      "",
+      "`leave` cleans the stack frame. In the above script, it is equal to:",
+      "\tmov rsp, rbp",
+      "\tpop rbp"
+    ]
+  },
+  "if preprocessor": {
+    "prefix": "if",
+    "body": [
+      "if ${condition}",
+      "\t${0}",
+      "%endif"
+    ],
+    "description": "If stalement for preprocessor"
+  },
+  "ifnot preprocessor": {
+    "prefix": "ifn",
+    "body": [
+      "ifn ${condition}",
+      "\t${0}",
+      "%endif"
+    ],
+    "description": "If stalement for preprocessor"
+  },
+  "ifdef": {
+    "prefix": "ifdef",
+    "body": [
+      "ifdef ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is defined"
+  },
+  "ifndef": {
+    "prefix": "ifndef",
+    "body": [
+      "ifndef ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is not defined"
+  },
+  "ifmacro": {
+    "prefix": "ifmacro",
+    "body": [
+      "ifmacro ${1:MACRO}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If macro is defined"
+  },
+  "ifnmacro": {
+    "prefix": "ifnmacro",
+    "body": [
+      "ifnmacro ${1:MACRO}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If macro is not defined"
+  },
+  "ifctx": {
+    "prefix": "ifctx",
+    "body": [
+      "ifctx ${1:CONTEXT}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If current context is matched"
+  },
+  "ifnctx": {
+    "prefix": "ifnctx",
+    "body": [
+      "ifnctx ${1:CONTEXT}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If current context is NOT matched"
+  },
+  "ifidn": {
+    "prefix": "ifidn",
+    "body": [
+      "ifidn ${1:str1}, ${2:str2}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If strings are identical (case-sensitive)"
+  },
+  "ifidni": {
+    "prefix": "ifidni",
+    "body": [
+      "ifidni ${1:str1}, ${2:str2}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If strings are identical (case-insensitive)"
+  },
+  "ifstr": {
+    "prefix": "ifstr",
+    "body": [
+      "ifstr ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is a string"
+  },
+  "ifnstr": {
+    "prefix": "ifnstr",
+    "body": [
+      "ifnstr ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is NOT a string"
+  },
+  "ifnum": {
+    "prefix": "ifnum",
+    "body": [
+      "ifnum ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is numeric"
+  },
+  "ifnnum": {
+    "prefix": "ifnnum",
+    "body": [
+      "ifnnum ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is NOT numeric"
+  },
+  "iftoken": {
+    "prefix": "iftoken",
+    "body": [
+      "iftoken ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is a single token"
+  },
+  "ifntoken": {
+    "prefix": "ifntoken",
+    "body": [
+      "ifntoken ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is NOT a single token"
+  },
+  "ifid": {
+    "prefix": "ifid",
+    "body": [
+      "ifid ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is an identifier"
+  },
+  "ifnid": {
+    "prefix": "ifnid",
+    "body": [
+      "ifnid ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is NOT an identifier"
+  },
+  "ifempty": {
+    "prefix": "ifempty",
+    "body": [
+      "ifempty ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is empty"
+  },
+  "ifnempty": {
+    "prefix": "ifnempty",
+    "body": [
+      "ifnempty ${1:SYMBOL}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If symbol is NOT empty"
+  },
+  "ifenv": {
+    "prefix": "ifenv",
+    "body": [
+      "ifenv ${1:VAR}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If environment variable exists"
+  },
+  "ifnenv": {
+    "prefix": "ifnenv",
+    "body": [
+      "ifnenv ${1:VAR}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If environment variable does NOT exist"
+  },
+  "elif": {
+    "prefix": "elif",
+    "body": [
+      "elif ${1:condition}",
+      "\t$0"
+    ],
+    "description": "Else-if preprocessor"
+  },
+  "elifn": {
+    "prefix": "elifn",
+    "body": [
+      "elifn ${1:condition}",
+      "\t$0"
+    ],
+    "description": "Else-if preprocessor"
+  },
+  "elifdef": {
+    "prefix": "elifdef",
+    "body": [
+      "elifdef ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is defined"
+  },
+  "elifndef": {
+    "prefix": "elifndef",
+    "body": [
+      "elifndef ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is NOT defined"
+  },
+  "elifmacro": {
+    "prefix": "elifmacro",
+    "body": [
+      "elifmacro ${1:MACRO}",
+      "\t$0"
+    ],
+    "description": "Else-if macro is defined"
+  },
+  "elifnmacro": {
+    "prefix": "elifnmacro",
+    "body": [
+      "elifnmacro ${1:MACRO}",
+      "\t$0"
+    ],
+    "description": "Else-if macro is NOT defined"
+  },
+  "elifctx": {
+    "prefix": "elifctx",
+    "body": [
+      "elifctx ${1:CONTEXT}",
+      "\t$0"
+    ],
+    "description": "Else-if context matched"
+  },
+  "elifnctx": {
+    "prefix": "elifnctx",
+    "body": [
+      "elifnctx ${1:CONTEXT}",
+      "\t$0"
+    ],
+    "description": "Else-if context NOT matched"
+  },
+  "elifidn": {
+    "prefix": "elifidn",
+    "body": [
+      "elifidn ${1:str1}, ${2:str2}",
+      "\t$0"
+    ],
+    "description": "Else-if strings equal (case-sensitive)"
+  },
+  "elifidni": {
+    "prefix": "elifidni",
+    "body": [
+      "elifidni ${1:str1}, ${2:str2}",
+      "\t$0"
+    ],
+    "description": "Else-if strings equal (case-insensitive)"
+  },
+  "elifstr": {
+    "prefix": "elifstr",
+    "body": [
+      "elifstr ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is string"
+  },
+  "elifnstr": {
+    "prefix": "elifnstr",
+    "body": [
+      "elifnstr ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is NOT string"
+  },
+  "elifnum": {
+    "prefix": "elifnum",
+    "body": [
+      "elifnum ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is numeric"
+  },
+  "elifnnum": {
+    "prefix": "elifnnum",
+    "body": [
+      "elifnnum ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is NOT numeric"
+  },
+  "eliftoken": {
+    "prefix": "eliftoken",
+    "body": [
+      "eliftoken ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is token"
+  },
+  "elifntoken": {
+    "prefix": "elifntoken",
+    "body": [
+      "elifntoken ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is NOT token"
+  },
+  "elifid": {
+    "prefix": "elifid",
+    "body": [
+      "elifid ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is identifier"
+  },
+  "elifnid": {
+    "prefix": "elifnid",
+    "body": [
+      "elifnid ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is NOT identifier"
+  },
+  "elifempty": {
+    "prefix": "elifempty",
+    "body": [
+      "elifempty ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is empty"
+  },
+  "elifnempty": {
+    "prefix": "elifnempty",
+    "body": [
+      "elifnempty ${1:SYMBOL}",
+      "\t$0"
+    ],
+    "description": "Else-if symbol is NOT empty"
+  },
+  "elifenv": {
+    "prefix": "elifenv",
+    "body": [
+      "elifenv ${1:VAR}",
+      "\t$0"
+    ],
+    "description": "Else-if environment var exists"
+  },
+  "elifnenv": {
+    "prefix": "elifnenv",
+    "body": [
+      "elifnenv ${1:VAR}",
+      "\t$0"
+    ],
+    "description": "Else-if environment var does NOT exist"
+  },
+  "else": {
+    "prefix": "else",
+    "body": [
+      "else",
+      "\t$0"
+    ],
+    "description": "To execute if all stalements are not met."
+  },
+  "endif": {
+    "prefix": "endif",
+    "body": [
+      "endif",
+      "\t$0"
+    ],
+    "description": "End the current if* stalement"
+  },
+  "define": {
+    "prefix": "define",
+    "body": [
+      "define ${1:NAME} ${2:VALUE}"
+    ],
+    "description": "NASM %define macro in order to define a single-line macro"
+  },
+  "undef": {
+    "prefix": "undef",
+    "body": [
+      "undef ${1:NAME}"
+    ],
+    "description": "NASM %undef macro in order to undef a single-line macro"
+  },
+  "struc": {
+    "prefix": "struc",
+    "body": [
+      "struc ${1:STRUCTNAME}",
+      "\t${0}",
+      "endstruc"
+    ],
+    "description": "NASM struc to create a structure of data.\nIndex using [SAVEDSTRUCTADDRESS + STRUCTNAME.structvariable].\nSave the struct using: mov register, istruc_value"
+  },
+  "istruc": {
+    "prefix": "istruc",
+    "body": [
+      "istruc ${1:STRUCTNAME}",
+      "\tat${0}",
+      "iend"
+    ],
+    "description": [
+      "NASM istruc to define a particular struct from an uninitialized struc.",
+      "Define example:",
+      "",
+      "struc Point",
+      "\t.x resq 1    ; 8 bytes = 64 bits (resd for 32-bit; resw for 16-bit, resb for 8-bit, rest for 80-bits)",
+      "\t.y resq 2",
+      "\t; Point_size = 8 bytes/1 element * 2 elements = 16 bytes",
+      "\t; Point.x = 0",
+      "\t; Point.y = 8",
+      "endstruc",
+      "",
+      "section .data",
+      "p1:",
+      "\tistruc Point",
+      "\t\tat Point.x, dq 123",
+      "\t\tat Point.y, dq 456",
+      "\tiend",
+      "",
+      "section .text",
+      "\tglobal _start",
+      "_start:",
+      "\tmov rsi, p1  ; Save the struct into rsi register",
+      "\tmov rax, [rsi + Point.x] ; Index x, now RAX = 123",
+      "\tmov rbx, [rsi + Point.y] ; Index y, now RBX = 456",
+      "\t; Replace 'rsi' using the struct 'p1' if you have not saved that struct into rsi register yet."
+    ]
+  },
+  "assign": {
+    "prefix": "assign",
+    "body": [
+      "assign ${1:NAME} ${2:VALUE}"
+    ],
+    "description": "NASM %assign macro"
+  },
+  "macro": {
+    "prefix": "macro",
+    "body": [
+      "macro ${1:NAME} ${2:ARGS}",
+      "\t$0",
+      "%endmacro"
+    ],
+    "description": "NASM macro block in order to define a multi-line macro"
+  },
+  "imacro": {
+    "prefix": "imacro",
+    "body": [
+      "imacro ${1:NAME} ${2:ARGS}",
+      "\t$0",
+      "%endmacro"
+    ],
+    "description": "NASM imacro block in order to define a multi-line macro"
+  },
+  "rep": {
+    "prefix": "rep",
+    "body": [
+      "rep ${1:COUNT}",
+      "\t$0",
+      "%endrep"
+    ],
+    "description": "NASM repetition block"
+  },
+  "exitrep": {
+    "prefix": "exitrep",
+    "body": [
+      "exitrep"
+    ],
+    "description": "Exit the rep loop."
+  },
+  "endrep": {
+    "prefix": "endrep",
+    "body": [
+      "endrep"
+    ],
+    "description": "End the rep loop."
+  },
+  "xdefine": {
+    "prefix": "xdefine",
+    "body": [
+      "xdefine ${1:NAME} ${2:VALUE}"
+    ],
+    "description": "NASM %xdefine (lazy macro)"
+  },
+  "idefine": {
+    "prefix": "idefine",
+    "body": [
+      "idefine ${1:NAME} ${2:VALUE}"
+    ],
+    "description": "NASM %idefine (case-insensitive macro)"
+  },
+  "defstr": {
+    "prefix": "defstr",
+    "body": [
+      "defstr ${1:NAME} ${2:\"string\"}"
+    ],
+    "description": "NASM %defstr (define from quoted string)"
+  },
+  "deftok": {
+    "prefix": "deftok",
+    "body": [
+      "deftok ${1:NAME} ${2:TOKEN}"
+    ],
+    "description": "NASM %deftok (define from token)"
+  },
+  "defalias": {
+    "prefix": "defalias",
+    "body": [
+      "defalias ${1:NEWNAME} ${2:EXISTING}"
+    ],
+    "description": "NASM %defalias (alias for macro name)"
+  },
+  "undefstr": {
+    "prefix": "undefstr",
+    "body": [
+      "undefstr ${1:NAME}"
+    ],
+    "description": "NASM %undefstr (remove string macro)"
+  },
+  "undeftok": {
+    "prefix": "undeftok",
+    "body": [
+      "undeftok ${1:NAME}"
+    ],
+    "description": "NASM %undeftok (remove token macro)"
+  },
+  "undefalias": {
+    "prefix": "undefalias",
+    "body": [
+      "undefalias ${1:NAME}"
+    ],
+    "description": "NASM %undefalias (remove alias)"
+  },
+  "unmacro": {
+    "prefix": "unmacro",
+    "body": [
+      "unmacro ${1:NAME} ${2:ARGS}"
+    ],
+    "description": "NASM unmacro a multi-line macro with target undef arguments in that thing"
+  },
+  "strcat": {
+    "prefix": "strcat",
+    "body": [
+      "strcat ${1:DEST}, ${2:STR1}, ${3:STR2}"
+    ],
+    "description": "NASM %strcat (concatenate strings)"
+  },
+  "strlen": {
+    "prefix": "strlen",
+    "body": [
+      "strlen ${1:DEST} ${2:STR}"
+    ],
+    "description": "NASM %strlen (length of string)"
+  },
+  "substr": {
+    "prefix": "substr",
+    "body": [
+      "substr ${1:DEST} ${2:STRV} ${3:REALSTR} ${4:NUMARGS}"
+    ],
+    "description": "NASM %substr in order to extract strings"
+  },
+  "absolute value": {
+    "prefix": "abs",
+    "body": [
+      "abs(${0})"
+    ],
+    "description": "NASM %abs for calculating the absolute value of a number"
+  },
+  "cond": {
+    "prefix": "cond",
+    "body": [
+      "cond(${0})"
+    ],
+    "description": "NASM %cond to expand a value into the second argument if true (nonzero), or the third one (if false)"
+  },
+  "count": {
+    "prefix": "count",
+    "body": [
+      "count(${0})"
+    ],
+    "description": "NASM %count to return the number that is a len passed to a macro"
+  },
+  "eval": {
+    "prefix": "eval",
+    "body": [
+      "eval(${0})"
+    ],
+    "description": "NASM %eval command to calculate the result of an integer expression"
+  },
+  "hexdecimal convert function": {
+    "prefix": "hex",
+    "body": [
+      "hex(${1:EXPRESSION})"
+    ],
+    "description": "NASM %hex: Compute the expression and return a hexdecimal number to the single-line macro as 0xXX"
+  },
+  "num": {
+    "prefix": "num",
+    "body": [
+      "num(${1:EXPRESSION})"
+    ],
+    "description": "NASM %num: Force a value to be an unsigned 64-bit integer"
+  },
+  "str": {
+    "prefix": "str",
+    "body": [
+      "str(${1:EXPRESSION})"
+    ],
+    "description": "NASM %str: Force a value to be a defined string"
+  },
+  "tok": {
+    "prefix": "tok",
+    "body": [
+      "tok(${1:EXPRESSION})"
+    ],
+    "description": "NASM %tok: Force a value to be a defined token (characters, numbers, symbols,...like a string)"
+  },
+  "sel": {
+    "prefix": "sel",
+    "body": [
+      "sel ${1:SINGLE-LINE_MACRO, LIST_OF_VALUES}"
+    ],
+    "description": [
+      "NASM %sel: Choose an indexed value using number, the first value has the number is 0",
+      "Syntax: %sel [index_number], [a], [b], [c], ...  ; Returns the i^(th) number",
+      "Basic example:",
+      "%define first %sel 0, foo, bar, baz",
+      "%define second %sel 1, foo, bar, baz",
+      "After the preprocessor, it is like:",
+      "%define first foo",
+      "%define second bar",
+      "Attention: %sel is a static action in the preprocessor, it does not work with runtime values, only works with text substitution"
+    ]
+  },
+  "map": {
+    "prefix": "map",
+    "body": [
+      "map ${1:MAPMACRO, MAPVALUES}"
+    ],
+    "description": [
+      "NASM %map: Map all values into a group for the repitition and more uses",
+      "Syntax: %map [macro], [list_of_values]",
+      "Basic example:",
+      "%macro make_label 1",
+      "\tlabel_%1:",
+      "%endmacro",
+      "",
+      "%map make_label, foo, bar, baz",
+      "",
+      "After the preprocessor, it will be:",
+      "label_foo:",
+      "label_bar:",
+      "label_baz:",
+      "Attention: %map only works with one-argument multi-line macro"
+    ]
+  },
+  "map with parenthesises": {
+    "prefix": "map(",
+    "body": [
+      "map(${1:MAPMACRO, MAPVALUES})"
+    ],
+    "description": [
+      "NASM %map: The '()' macro of %map"
+    ]
+  },
+  "sel with parenthesises": {
+    "prefix": "sel(",
+    "body": [
+      "sel(${1:SINGLE-LINE_MACRO, LIST_OF_VALUES})"
+    ],
+    "description": [
+      "NASM %sel: The '()' macro of %sel"
+    ]
+  },
+  "strcat function with parenthesises": {
+    "prefix": "strcat(",
+    "body": [
+      "strcat(${0})"
+    ],
+    "description": "NASM %strcat (concatenate strings)"
+  },
+  "strlen function with parenthesises": {
+    "prefix": "strlen(",
+    "body": [
+      "strlen(${1:STRING_VALUE})"
+    ],
+    "description": "NASM %strlen to calculate the length of a string"
+  },
+  "substr function with parenthesises": {
+    "prefix": "substr(",
+    "body": [
+      "substr(${SINGLE-LINE_MACRO, TARGET_STRING, STRING_ELEMENT_NUMBER, NUMBER_OF_EXTRACTED_STRINGS})"
+    ],
+    "description": "NASM %substr to extract strings. By default, NUMBER_OF_EXTRACTED_STRINGS = 1"
+  },
+  "rotate": {
+    "prefix": "rotate",
+    "body": [
+      "rotate ${1:N}"
+    ],
+    "description": [
+      "NASM %rotate: Rotate an element number list of a macro N times",
+      "If N > 0, turns left. Otherwise, turn right if N != 0",
+      "",
+      "Imagine you have a macro like this:",
+      "custom A, B, C, D    ; %1 = A, %2 = B, %3 = C, %4 = D",
+      "and you use this command inside the macro:",
+      "%rotate 1",
+      "Now, the macro after being rotated is:",
+      "custom B, C, D, A",
+      "and parameters' numbers are:",
+      "%1 = B, %2 = C, %3 = D, %4 = A",
+      "",
+      "Basic example (You can use %rep for faster, but I do this to make you understand the meaning of %rotate):",
+      "",
+      "%macro myargs 5",
+      "\t; Print 5 times, each printing time rotates",
+      "\t; For example: If myargs A, B, C, D, E with A = %1",
+      "\tdb `%1`, 10",
+      "\trotate 1       ; Now B = %1",
+      "\tdb `%1`, 10",
+      "\trotate 1       ; Now C = %1",
+      "\tdb `%1`, 10",
+      "\trotate 1       ; Now D = %1",
+      "\tdb `%1`, 10",
+      "\trotate 1       ; Now E = %1",
+      "\tdb `%1`, 10",
+      "%endmacro",
+      "",
+      "myargs \"A\", \"B\", \"C\", \"D\", \"E\"",
+      "",
+      "The output is:",
+      "",
+      "db \"A\", 10",
+      "db \"B\", 10",
+      "db \"C\", 10",
+      "db \"D\", 10",
+      "db \"E\", 10",
+      "",
+      "I recommend you to combine this with %rep for the loops"
+    ]
+  }
+}
