@@ -2,11 +2,7 @@
   "name": "coc-nasm",
   "description": "This is the snippets and autocompletions for Netwide Assembler language in coc.nvim",
   "main": "out/index.js",
-<<<<<<< HEAD
-=======
-  "version": "0.3.0",
->>>>>>> d57afcc (fix bug)
-  "version": "0.3.1",
+  "version": "0.3.2",
   "engines": {
     "coc": "^0.0.80"
   },
