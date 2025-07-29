@@ -229,68 +229,6 @@
       "nasm -Iincludes/ -Isrc/ main.nasm"
     ]
   },
-  "push": {
-    "prefix": "%push",
-    "body": [
-      "%push ${1:SOMETHING}",
-      "\t${0}",
-      "%pop"
-    ],
-    "description": [
-      "%push: Save the current stack by doing a stack push",
-      "",
-      "Basic syntax:",
-      "%push content_name   ; Name the stack content",
-      "\t%define foo 123    ; This is only an example command",
-      "\t...",
-      "%pop                 ; Recover all the previous definitions",
-      "",
-      "For instance:",
-      "",
-      "%define foo 1",
-      "",
-      "%push content",
-      "\t%define foo 42",
-      "\t; In here, foo = 42",
-      "%pop",
-      "; After poping, foo == 1",
-      "",
-      "For the more particular situation, we need to manage the content, like this:",
-      "",
-      "%macro scoped_macro 0",
-      "\t%push mscope",
-      "\t\t%define _tmp eax",
-      "\t\tmov _tmp, 0",
-      "\t%pop",
-      "%endmacro",
-      "",
-      "scoped_macro",
-      "; _tmp now does not exist anymore",
-      "",
-      "If you do not use push or pop, you can change the defined macro outside.",
-      "",
-      "%define reg eax",
-      "",
-      "%macro bad_macro 0",
-      "\t%define reg ebx  ; Will exist instantly, do not remove.",
-      "%endmacro",
-      "",
-      "bad_macro",
-      "mov reg, 1         ; Use wrong register!",
-      "",
-      "Use %push/%pop to avoid that situation.",
-      "",
-      "Attention:",
-      "%push only applies for the definition in the preprocessor: %define, %idefine, %xdefine, %assign,...",
-      "Cannot apply %push into the label inside machine codes (you need to use command `push` instead).",
-      "You can use many floors of %push if you can",
-      "",
-      "Uses in real life: %push and %pop are requied to:",
-      "- Take down DSL macros like if/else, switch/case;",
-      "- Use %define to define variables or registers;",
-      "- Automatically generate macro using script or snippets;"
-    ]
-  },
   "arg": {
     "prefix": "arg",
     "body": [
@@ -1251,6 +1189,52 @@
       "db \"E\", 10",
       "",
       "I recommend you to combine this with %rep for the loops"
-    ]
+    ],
+    "__?NASM_VERSION_ID?__": {
+      "prefix": "__?NASM_VERSION_ID?__",
+      "body": [
+        "__?NASM_VERSION_ID?__"
+      ],
+      "description": [
+        "Returns Netwide Assembler version ID (dword integer)"
+      ]
+    },
+    "__?NASM_VER?__": {
+      "prefix": "__?NASM_VER?__",
+      "body": [
+        "__?NASM_VER?__"
+      ],
+      "description": [
+        "Returns Netwide Assembler version (bytes data type)"
+      ]
+    },
+    "__?FILE?__": {
+      "prefix": "__?FILE?__",
+      "body": [
+        "__?FILE?__"
+      ],
+      "description": [
+        "Returns the name of the current file (could change if %include directives are used)"
+      ]
+    },
+    "__?LINE?__": {
+      "prefix": "__?LINE?__",
+      "body": [
+        "__?LINE?__"
+      ],
+      "description": [
+        "Returns the current line in the input file"
+      ]
+    },
+    "__?BITS?__": {
+      "prefix": "__?BITS?__",
+      "body": [
+        "__?BITS?__"
+      ],
+      "description": [
+        "Returns the current code generation mode.",
+        "BITS mode is set using BITS XX or [BITS XX] directive with XX has valid modes like 16, 32 or 64."
+      ]
+    }
   }
 }
