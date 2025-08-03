@@ -430,6 +430,15 @@
       "\tpop rbp"
     ]
   },
+  "%push preprocessor": {
+    "prefix": "push",
+    "body": [
+      "push ${CONTENT}",
+      "\t${0}",
+      "%pop"
+    ],
+    "description": "Push preprocessor: Push data into a temporatory to save until meeting %pop"
+  },
   "if preprocessor": {
     "prefix": "if",
     "body": [

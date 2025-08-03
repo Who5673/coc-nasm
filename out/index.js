@@ -52,8 +52,6 @@ const nasmInstructions = [
     ['ret', 'Return from procedure'],
     ['leave', "Cleans the stack frame and restore the previous value (which is initialized before entering)"],
     ['push', 'Push to stack'],
-    ['%push', 'Push preprocessor'],
-    ['%pop', 'Pop preprocessor'],
     ['pop', 'Pop from stack'],
     ['inc', 'Increment 1 unit of a register or memory'],
     ['dec', 'Decrement 1 unit of a register or memory'],
