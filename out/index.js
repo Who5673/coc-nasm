@@ -49,6 +49,8 @@ const nasmInstructions = [
     ['div', 'Divide (unsigned) 2 numbers'],
     ['idiv', 'Divide (signed) 2 numbers'],
     ['int', 'Interrupt'],
+    ['cli', "Clear interrupt"],
+    ['hlt', "(**Halt**) Wait for the hardware signal, does not spin CPU"],
     ['ret', 'Return from procedure'],
     ['leave', "Cleans the stack frame and restore the previous value (which is initialized before entering)"],
     ['push', 'Push to stack'],
