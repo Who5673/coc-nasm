@@ -50,7 +50,8 @@ const nasmInstructions = [
     ['idiv', 'Divide (signed) 2 numbers'],
     ['int', 'Interrupt'],
     ['cli', "Clear interrupt"],
-    ['hlt', "(**Halt**) Wait for the hardware signal, does not spin CPU"],
+    ['hlt', "(Halt) Wait for the hardware signal, does not spin CPU"],
+    ['bits', "bits command"],
     ['ret', 'Return from procedure'],
     ['leave', "Cleans the stack frame and restore the previous value (which is initialized before entering)"],
     ['push', 'Push to stack'],
@@ -181,6 +182,31 @@ const nasmInstructions = [
     ["fist", "Store st(0) as integer (truncate/floor depending on mode)"],
     ["fistp", "Store st(0) as integer and pop the FPU stack"],
     ["fldcw", "Load a value into FPU control word so as to change how FPU deals with the floating point number (rounding numbers, accuracy, handle exceptions,...).\nSyntax: fldcw [mem16]"],
+    ["__?NASM_VERSION_ID?__", "Returns Netwide Assembler version ID (dword integer)"],
+    ["__?NASM_VER?__", "Returns Netwide Assembler current version inside a script (**bytes data**)"],
+    ["__?FILE?__", "Returns the name of the input file"],
+    ["__?LINE?__", "Returns the number of current line in a file"],
+    ["__?BITS?__", `
+Return the current code generation mode.
+Current code generation mode can be defined by using BITS command:
+
+BITS 16    ; Code generation: 16-bit mode (great for making a BOOTLOADER).
+
+`],
+    ["__?OUTPUT_FORMAT?__", `
+Returns the **format type** of the file.
+**Format type** of the file can be given using the **parameter -f** to assemble a file into an **object file** (.obj in Windows, .o in Linux distros). For instance:
+
+nasm -f elf64 main.nasm -o main.o   # Format can be elf64, win64, elf32, win32, bin,..., which depends on the Instruction Set Architecture of a hardware device.
+
+So that the macro returns "elf64" value.
+  ]],
+	["__?DEBUG_FORMAT?__"] = [[
+If the debug format is enabled, it returns the debug format.
+Otherwise, it returns "null".
+
+The debug format can be found using -F and -g option. Type nasm -f output y for a list.
+  `],
 ];
 class NasmCompletionProvider {
     async provideCompletionItems(document, position) {

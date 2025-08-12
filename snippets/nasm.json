@@ -1198,52 +1198,6 @@
       "db \"E\", 10",
       "",
       "I recommend you to combine this with %rep for the loops"
-    ],
-    "__?NASM_VERSION_ID?__": {
-      "prefix": "__?NASM_VERSION_ID?__",
-      "body": [
-        "__?NASM_VERSION_ID?__"
-      ],
-      "description": [
-        "Returns Netwide Assembler version ID (dword integer)"
-      ]
-    },
-    "__?NASM_VER?__": {
-      "prefix": "__?NASM_VER?__",
-      "body": [
-        "__?NASM_VER?__"
-      ],
-      "description": [
-        "Returns Netwide Assembler version (bytes data type)"
-      ]
-    },
-    "__?FILE?__": {
-      "prefix": "__?FILE?__",
-      "body": [
-        "__?FILE?__"
-      ],
-      "description": [
-        "Returns the name of the current file (could change if %include directives are used)"
-      ]
-    },
-    "__?LINE?__": {
-      "prefix": "__?LINE?__",
-      "body": [
-        "__?LINE?__"
-      ],
-      "description": [
-        "Returns the current line in the input file"
-      ]
-    },
-    "__?BITS?__": {
-      "prefix": "__?BITS?__",
-      "body": [
-        "__?BITS?__"
-      ],
-      "description": [
-        "Returns the current code generation mode.",
-        "BITS mode is set using BITS XX or [BITS XX] directive with XX has valid modes like 16, 32 or 64."
-      ]
-    }
+    ]
   }
 }
