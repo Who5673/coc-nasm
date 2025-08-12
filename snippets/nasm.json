@@ -1199,5 +1199,12 @@
       "",
       "I recommend you to combine this with %rep for the loops"
     ]
+  },
+  "__?USE_PACKAGE?__": {
+    "prefix": "__?USE_package?__",
+    "body": [
+      "__?USE_${1:PACKAGE}?__"
+    ],
+    "description": "Testing if a particular package is invoked or not"
   }
 }

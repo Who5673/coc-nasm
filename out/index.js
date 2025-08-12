@@ -67,7 +67,22 @@ const nasmInstructions = [
     ['shr', 'Take the margin from the left to the right (>>). Example: 8 SHR 1'],
     ['syscall', 'Call the system kernel'],
     ['extern', 'extern a function (normally use for include libraries)'],
-    ['align', 'align N in order to make the script faster by initializing N using the common muliple of N, like 16 or 64'],
+    ['alignb', 'align N in order to make the script faster by initializing N using the common muliple of N, like 16 or 64'],
+    ['align', `
+align N           ; align on N-byte boundary (common values: 4, 16, 64)
+align 8,db 0x0a   ; pad with 0x0As rather than NOPs
+align 16,resz 1   ; align to 16 zword in the BSS section, zword 512-bit
+`],
+    ["sectalign", `
+This align macro can be used at any time. For example:
+
+SECTALIGN 16    ; Sets the section alignment requirements to 16 bytes
+                ; Once increased it can not be decreased, the magnitude may grow only.
+
+You can turn ON or OFF this alignment.
+  `],
+    ["on", "Turn on the SECTALIGN"],
+    ["off", "Turn off the SECTALIGN"],
     ['movsb', 'normally used with rep to copy bytes from one place to another'],
     ['stosb', 'normally used with rep to write bytes from one place to another'],
     ['cmpsb', 'normally used with repne to compare different byte strings'],
@@ -183,7 +198,7 @@ const nasmInstructions = [
     ["fistp", "Store st(0) as integer and pop the FPU stack"],
     ["fldcw", "Load a value into FPU control word so as to change how FPU deals with the floating point number (rounding numbers, accuracy, handle exceptions,...).\nSyntax: fldcw [mem16]"],
     ["__?NASM_VERSION_ID?__", "Returns Netwide Assembler version ID (dword integer)"],
-    ["__?NASM_VER?__", "Returns Netwide Assembler current version inside a script (**bytes data**)"],
+    ["__?NASM_VER?__", "Returns Netwide Assembler current version inside a script (bytes data)"],
     ["__?FILE?__", "Returns the name of the input file"],
     ["__?LINE?__", "Returns the number of current line in a file"],
     ["__?BITS?__", `
@@ -194,18 +209,50 @@ BITS 16    ; Code generation: 16-bit mode (great for making a BOOTLOADER).
 
 `],
     ["__?OUTPUT_FORMAT?__", `
-Returns the **format type** of the file.
-**Format type** of the file can be given using the **parameter -f** to assemble a file into an **object file** (.obj in Windows, .o in Linux distros). For instance:
+Returns the format type of the file.
+Format type of the file can be given using the parameter -f to assemble a file into an object file (.obj in Windows, .o in Linux distros). For instance:
 
 nasm -f elf64 main.nasm -o main.o   # Format can be elf64, win64, elf32, win32, bin,..., which depends on the Instruction Set Architecture of a hardware device.
 
 So that the macro returns "elf64" value.
-  ]],
-	["__?DEBUG_FORMAT?__"] = [[
+  `],
+    ["__?DEBUG_FORMAT?__", `
 If the debug format is enabled, it returns the debug format.
 Otherwise, it returns "null".
 
 The debug format can be found using -F and -g option. Type nasm -f output y for a list.
+  `],
+    /* Date and time macros */
+    ["__?DATE?__", "Returns the assembly DATE as strings in ISO 8601 format (YYYY-MM-DD)"],
+    ["__?TIME?__", "Returns the assembly TIME as strings in ISO 8601 format (HH:MM:SS)"],
+    ["__?DATE_NUM?__", "Returns the assembly DATE in numeric form (YYYYMMDD)"],
+    ["__?TIME_NUM?__", "Returns the assembly TIME in numeric form (HHMMSS)"],
+    ["__?UTC_DATE?__", "Gives the assembly DATE in universal time (UTC) as strings, in ISO 8681 format (YYYY-MM-DD)"],
+    ["__?UTC_TIME?__", "Gives the assembly TIME in universal time (UTC) as strings, in ISO 8681 format (HH:MM:SS)"],
+    ["__?POSIX_TIME?__", `
+Returns the POSIX TIME (qword integer).
+
+What is POSIX TIME?
+- POSIX TIME is a number of seconds that has been from the first of January in 1970 at 00:00:00 UTC.
+- Calculate the POSIX TIME (unit: seconds):
+
+  POSIX_TIME = current_time - 1970-01-01 00:00:00 (s)
+
+- POSIX TIME helps us compare the time super fast as we only need to compare 2 different integers.
+- It is also easy to calculate the seconds to make a new time.
+- That time is great for the sync between UNIX-like system.
+
+Expire time (YYYY-MM-DD):
+- dword (32-bit): 2038-01-19 (Year 2038 problem).
+- qword (64-bit): about the year ~200 000 000 000.
+  `],
+    ["__?PASS?__", `
+Assembly pass.
+
+This macro defined to be 1 on preparatory passes, and 2 on the final pass. In preprocess-only mode, it is set to 3.  
+When running only to generate dependencies (because of the -M or -MG option), it is set to 0.  
+
+It is strongly recommended to avoid using this macro if at all possible. It is tremendously easy to generate very strange errors by misusing it, and the semantics may change in future versions of NASM.
   `],
 ];
 class NasmCompletionProvider {
