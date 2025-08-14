@@ -2,7 +2,7 @@
   "name": "coc-nasm",
   "description": "This is the snippets and autocompletions for Netwide Assembler language in coc.nvim",
   "main": "out/index.js",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "engines": {
     "coc": "^0.0.80"
   },
@@ -44,8 +44,6 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "coc.nvim": "^0.0.80",
-    "vscode-languageserver": "^9.0.1",
-    "vscode-languageserver-textdocument": "^1.0.12"
+    "coc.nvim": "^0.0.80"
   }
 }
