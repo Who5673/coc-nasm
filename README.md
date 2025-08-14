@@ -22,7 +22,6 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-*Due to the high difficulty of Vietnamese tenth-grade exam, I cannot update this plugin regularly (2025 - 2026). I need to spend my time focusing on the skills to do that exam (I am just 14 years old).*
 
 # coc-nasm
 __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one of the plugin for Netwide Assembler (NASM) programing. In fact, Assembly Languages and Assemblers have few plugins for coding, but that does not mean we do not have any of them to support us.  
@@ -79,7 +78,7 @@ coc-nasm has some special words for NASM to use like:
 - `pi64` and `pi32` (snippets): Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture.
 - `basicoutput` (snippet): Write a basic script to print a variable into stdout (terminal screen). 
 - Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
-- Supports preprocessors
+- Supports preprocessors and standard macros;
 - You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/_vimrc (Windows)
 
 ## Please Note:

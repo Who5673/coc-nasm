@@ -1206,5 +1206,158 @@
       "__?USE_${1:PACKAGE}?__"
     ],
     "description": "Testing if a particular package is invoked or not"
+  },
+  "__?float8?__": {
+    "prefix": "__?float8?__",
+    "body": [
+      "__?float8?__(${1:x})"
+    ],
+    "description": "NASM macro for 8-bit floating-point literal"
+  },
+  "__?float16?__": {
+    "prefix": "__?float16?__",
+    "body": [
+      "__?float16?__(${1:x})"
+    ],
+    "description": "NASM macro for 16-bit floating-point literal"
+  },
+  "__?bfloat16?__": {
+    "prefix": "__?bfloat16?__",
+    "body": [
+      "__?bfloat16?__(${1:x})"
+    ],
+    "description": "NASM macro for bfloat16 floating-point literal"
+  },
+  "__?float32?__": {
+    "prefix": "__?float32?__",
+    "body": [
+      "__?float32?__(${1:x})"
+    ],
+    "description": "NASM macro for 32-bit floating-point literal"
+  },
+  "__?float64?__": {
+    "prefix": "__?float64?__",
+    "body": [
+      "__?float64?__(${1:x})"
+    ],
+    "description": "NASM macro for 64-bit floating-point literal"
+  },
+  "__?float80m?__": {
+    "prefix": "__?float80m?__",
+    "body": [
+      "__?float80m?__(${1:x})"
+    ],
+    "description": "NASM macro for 80-bit (memory format) floating-point literal"
+  },
+  "__?float80e?__": {
+    "prefix": "__?float80e?__",
+    "body": [
+      "__?float80e?__(${1:x})"
+    ],
+    "description": "NASM macro for 80-bit (extended format) floating-point literal"
+  },
+  "__?float128l?__": {
+    "prefix": "__?float128l?__",
+    "body": [
+      "__?float128l?__(${1:x})"
+    ],
+    "description": "NASM macro for 128-bit (low precision) floating-point literal"
+  },
+  "__?float128h?__": {
+    "prefix": "__?float128h?__",
+    "body": [
+      "__?float128h?__(${1:x})"
+    ],
+    "description": "NASM macro for 128-bit (high precision) floating-point literal"
+  },
+  "float8": {
+    "prefix": "float8",
+    "body": [
+      "float8(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 8-bit floating-point literal"
+    ]
+  },
+  "float16": {
+    "prefix": "float16",
+    "body": [
+      "float16(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 16-bit floating-point literal"
+    ]
+  },
+  "bfloat16": {
+    "prefix": "bfloat16",
+    "body": [
+      "bfloat16(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for bfloat16 floating-point literal"
+    ]
+  },
+  "float32": {
+    "prefix": "float32",
+    "body": [
+      "float32(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 32-bit floating-point literal"
+    ]
+  },
+  "float64": {
+    "prefix": "float64",
+    "body": [
+      "float64(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 64-bit floating-point literal"
+    ]
+  },
+  "float80m": {
+    "prefix": "float80m",
+    "body": [
+      "float80m(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 80-bit (memory format) floating-point literal"
+    ]
+  },
+  "float80e": {
+    "prefix": "float80e",
+    "body": [
+      "float80e(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 80-bit (extended format) floating-point literal"
+    ]
+  },
+  "float128l": {
+    "prefix": "float128l",
+    "body": [
+      "float128l(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 128-bit (low precision) floating-point literal"
+    ]
+  },
+  "float128h": {
+    "prefix": "float128h",
+    "body": [
+      "float128h(${1:x})"
+    ],
+    "description": [
+      "Require fp package used",
+      "NASM macro for 128-bit (high precision) floating-point literal"
+    ]
   }
 }
