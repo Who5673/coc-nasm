@@ -100,11 +100,29 @@
     "description": "An exaple program of Netwide Assembler language."
   },
   "section": {
-    "prefix": "sectionname",
+    "prefix": "section",
     "body": [
-      "section ${1:section}"
+      "section ${1:sectionname}"
     ],
-    "description": "Make a section in nasm\nmov section <section>"
+    "description": "Used to change and define sections"
+  },
+  "segment": {
+    "prefix": "segment",
+    "body": [
+      "segment ${1:segmentname}"
+    ],
+    "description": "`segment` is an exactly equivalent synonym of section"
+  },
+  "absolute": {
+    "prefix": "absolute",
+    "body": [
+      "absolute ${1:LABEL}"
+    ],
+    "description": [
+      "This command is used to define absolute labels.",
+      "According to https://nasm.us/doc/nasmdoc7.html#section-7.4, this can be thought of as an alternative form of SECTION due to the the causes that the subsequent code to be directed at no physical section.",
+      "However, (still according to that website) it causes at the hypothetical section starting at the given absolute address."
+    ]
   },
   "cmp": {
     "prefix": "cmp",
@@ -1358,6 +1376,57 @@
     "description": [
       "Require fp package used",
       "NASM macro for 128-bit (high precision) floating-point literal"
+    ]
+  },
+  "cpu_dependencies": {
+    "prefix": "cpu",
+    "body": [
+      "cpu ${1:cpu_keyword}"
+    ],
+    "description": [
+      "Defining CPU dependencies.",
+      "According to The Netwide Assembler HTML Document:",
+      "Current CPU keywords are:",
+      "\tCPU 8086 – Assemble only 8086 instruction set",
+      "\tCPU 186 – Assemble instructions up to the 80186 instruction set",
+      "\tCPU 286 – Assemble instructions up to the 286 instruction set",
+      "\tCPU 386 – Assemble instructions up to the 386 instruction set",
+      "\tCPU 486 – 486 instruction set",
+      "\tCPU 586 – Pentium instruction set",
+      "\tCPU PENTIUM – Same as 586",
+      "\tCPU 686 – P6 instruction set",
+      "\tCPU PPRO – Same as 686",
+      "\tCPU P2 – Same as 686",
+      "\tCPU P3 – Pentium III (Katmai) instruction sets",
+      "\tCPU KATMAI – Same as P3",
+      "\tCPU P4 – Pentium 4 (Willamette) instruction set",
+      "\tCPU WILLAMETTE – Same as P4",
+      "\tCPU PRESCOTT – Prescott instruction set",
+      "\tCPU X64 – x86-64 (x64/AMD64/Intel 64) instruction set",
+      "\tCPU IA64 – IA64 CPU (in x86 mode) instruction set",
+      "\tCPU DEFAULT – All available instructions",
+      "\tCPU ALL – All available instructions and flags",
+      "All options are case insensitive.",
+      "For AVX and AVX-512, currently available flags are:",
+      "\tEVEX – Enable generation of EVEX (AVX-512) encoded instructions without an explicit {evex} prefix. Default on.",
+      "\tVEX – Enable generation of VEX (AVX) or XOP encoded instructions without an explict {vex} prefix. Default on.",
+      "\tLATEVEX – Enable generation of VEX (AVX) encoding of instructions where the VEX instructions forms were introduced after the corresponding EVEX (AVX-512) instruction forms without requiring an explicit {vex} prefix. \nThis is implicit if the EVEX flag is disabled and the VEX flag is enabled. Default off."
+    ]
+  },
+  "float": {
+    "prefix": "float",
+    "body": [
+      "float ${1:floatingpoint_constant}"
+    ],
+    "description": "Handling of floating-point constants"
+  },
+  "[warning]": {
+    "prefix": "[warning]",
+    "body": [
+      "[warning ${1:WARNING_DIRECTIVE}]"
+    ],
+    "description": [
+      "Enable or disable warnibgs"
     ]
   }
 }

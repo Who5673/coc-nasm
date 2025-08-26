@@ -15,11 +15,55 @@ async function activate(context) {
 }
 exports.activate = activate;
 const nasmInstructions = [
-    ['default', 'This code must be at the first line of the script if you combine with rel in order to compile using gcc/g++ if you extern this from C/C++.'],
+    ["default", `
+; This code must be at the first line of a NASM script to change the assembler defaults.
+
+; DEFAULT can be set to rel & abs and bnd & nobnd. For example:
+
+default rel
+  `],
     ['neg', 'neg command - compute the absolute value (abs) of a register'],
-    ['rel', 'rel command in order to use a relative address of something'],
+    ["rel", `
+; rel command: RIP-relative addressing.
+
+
+default rel    ; Used to change the default addressing from absolute to relative
+; is disabled with:
+default abs
+  `],
+    ["abs", `
+; abs command: RIP-absolute addressing.
+; This is the default addressing unless overridden with rel.
+
+mov rax, [msg]       ; msg absolute address
+mov rax, [rel msg]   ; msg relative address
+
+section .data
+  msg db "Hello world", 0x0a, 0x00
+  `],
+    ["bnd", `
+; All BND prefix available instructions following this directive are prefixed with BND if this is the default
+
+default bnd
+call print_hello            ; BND will be prefixed
+nobnd call print_hello      ; BND will NOT be prefixed
+
+print_hello:
+  mov rax, 0x1
+  mov rdi, 0x1
+  mov rsi, msg
+  mov rdx, len
+  syscall
+  ret
+
+section .data
+  msg db "Hello world", 0x0a
+  len equ $-msg
+  `],
+    ['nobnd', "All BND prefix available instructions following this directive are not prefixed with BND."],
     // Data types
     ['byte', 'Use this to work with bytes. You can cmp byte using this (example: cmp byte [rdi + rcx], 0).'],
+    ['org', 'org command to secify the binary file program origin.'],
     ['word', "word data type (2 bytes = 16 bits).\nC-type relation: short int.\nSigned range: -32768 to +32767.\nUnsigned range: 0 to +65535"],
     ["dword", "dword data type (4 bytes = 32 bits).\nC-type relation: int, long int, float.\nSigned range (int): -2_147_483_648 to +2_147_483_647.\nUnsigned range (int): 0 to +4_294_967_296"],
     ["qword", "qword data type (8 bytes = 64 bits).\nC-type relation: long long int, double.\nSigned range (long long int): -9_223_372_036_854_775_808 to +9_223_372_036_854_775_807.\nUnsigned range (long long int): 0 to +18_446_744_073_709_551_615"],
@@ -52,7 +96,10 @@ const nasmInstructions = [
     ['int', 'Interrupt'],
     ['cli', "Clear interrupt"],
     ['hlt', "(Halt) Wait for the hardware signal, does not spin CPU"],
-    ['bits', "bits command"],
+    ['required', "Declare external function (usually from libraries). This command does not generate unknown symbols as that prevents header files.\x0aIf the old behavior is required, use REQUIRED keyword instead."],
+    ['bits', "; Target processor mode (16, 32, 64).\x0a; For example:\x0a\x0abits 16 ; Processor 16 bit, great for making bootloaders"],
+    ['use16', "; Alias for:\x0aBITS 16"],
+    ['use32', "; Alias for:\x0aBITS 32"],
     ['ret', 'Return from procedure'],
     ['leave', "Cleans the stack frame and restore the previous value (which is initialized before entering)"],
     ['push', 'Push to stack'],
@@ -156,8 +203,34 @@ You can turn ON or OFF this alignment.
     ['.text', '.text section'],
     [".nolist", ".nolist for disabling listing expansion"],
     ['_start', '_start main function'],
-    ['section', 'define a section'],
-    ['global', 'global a function'],
+    ["global", "Exporting Symbols to Other Modules or (or and) tell the ld linker what is the entry point of the script"],
+    ['common', `
+; Defining common data areas. According to The Netwide Assembler HTML document:
+; A common variable is much like a global variable declared in the uninitialized data section, so that:
+
+common intvar 4
+
+; is similar in function to
+
+global intvar
+section .bss
+intvar resd 1
+  `],
+    ['static', `
+; Local symbols within Modules, should be named according to the global mangling rules (named by analogy with the C keyword static as applied to functions or global variables).
+; Note: Unlike GLOBAL and EXTERN, static does not allow object formats to accept private extensions.
+
+static my_func
+my_func:
+  ; script for my_func
+  ret ; If this is not the entrypoint and works like a function
+  `],
+    ['prefix', "; Prepend the argument to all EXTERN, COMMON, STATIC, and GLOBAL symbols.\x0aG stands for GLOBAL and L stands for LOCAL"],
+    ['gprefix', "Like prefix"],
+    ['lprefix', "; Prepend the argument to all other symbols such as local labels and backend defined symbols."],
+    ['postfix', "; Append the argument to all EXTERN, COMMON, STATIC, and GLOBAL symbols."],
+    ['gpostfix', "Like postfix"],
+    ['lpostfix', "; Append the argument to all other symbols such as local labels and backend defined symbols."],
     ['.bss', '.bss section (used to define buffers)'],
     ['times', 'Create multiple times of a definding action.\nExample: buffer times 20 db 0xA    ; 20 line feeds (line feed = 10(dec) = 0xA(hex)'],
     ['db', 'Define byte (1 byte, for chars, strings, short numbers,...). C-type relation: char'],
@@ -327,7 +400,30 @@ Signaling Not a Number - Intended to signal an invalid operation exception when 
 
 Exponent = all 1’s, MSB of fraction = 0 (but fraction ≠ 0).
   `],
-    // Floats
+    // Warnings
+    ["+warning-class", "enable warnings for warning-class"],
+    ["-warning-class", "disable warnings for warning-class"],
+    ["*warning-class", "restore warning-class to the original value, either the default value or as specified on the command line."],
+    // Output formats
+    ["bin", "Flat-Form Binary Output - Output Format"],
+    ['ith', "Intel Hex Output - Output Format"],
+    ['srec', "Motorola S-Records Output - Output Format"],
+    ['obj', "Microsoft OMF Object Files - Output Format"],
+    ['win32', "Microsoft Win32 Object Files - Output Format"],
+    ['win64', "Microsoft Win64 Object Files - Output Format"],
+    ["coff", "Common Object File Format - Output Format"],
+    ["macho32", "Mach Object File Format (32-bit) - Output Format"],
+    ["macho64", "Mach Object File Format (64-bit) - Output Format"],
+    ['elf32', "Executable and linkable Format Object Files (32-bit) - Output Format"],
+    ['elfx32', `
+Executable and linkable Format Object Files (32-bit) - Output Format.
+The elfx32 format is used for the x32 ABI, which is a 32-bit ABI with the CPU in 64-bit mode.
+  `],
+    ['elf64', "Executable and linkable Format Object Files (64-bit) - Output Format"],
+    ['aout', "Linux a.out Object Files - Output Format"],
+    ['aoutb', "NetBSD, FreeBSD, OpenBSD a.out Object Files - Output Format"],
+    ['as86', "Minix/Linux as86 Object Files - Output Format"],
+    ['dbg', "Debugging Format - Output Format"],
 ];
 class NasmCompletionProvider {
     async provideCompletionItems(document, position) {
