@@ -29,27 +29,6 @@
       "r8 = argv[5], r9 = argv[6]"
     ]
   },
-  "equal to a len of a string": {
-    "prefix": "const",
-    "body": [
-      "equ $-${stringlabelname}"
-    ],
-    "description": "Calculate a length of a string. Place this thing right after you have defined byte a string value"
-  },
-  "basic pi (64-bit)": {
-    "prefix": "pi64",
-    "body": [
-      "pi dq 3.14${0}"
-    ],
-    "description": "Basic pi constant (64-bit)."
-  },
-  "basic pi (32-bit)": {
-    "prefix": "pi32",
-    "body": [
-      "pi dd 3.14${0}"
-    ],
-    "description": "Basic pi constant (32-bit)."
-  },
   "function": {
     "prefix": "function",
     "body": [
@@ -396,28 +375,6 @@
       "call ${functionname}"
     ],
     "description": "call a function"
-  },
-  "Basic script for outputing a variable/label": {
-    "prefix": "basicoutput",
-    "body": [
-      "mov rax, 1",
-      "mov rdi, 1",
-      "mov rsi, ${messagevalue}",
-      "mov rdx, ${len}",
-      "syscall"
-    ],
-    "description": "This script shows how to print a label basically"
-  },
-  "Basic script for inputing a variable/label": {
-    "prefix": "basicinput",
-    "body": [
-      "mov rax, 0",
-      "mov rdi, 0",
-      "mov rsi, ${buffervariable}   ; ",
-      "mov rdx, 30",
-      "syscall"
-    ],
-    "description": "This script shows how to make a user input by reading the sidin.\nYou must make an uninitialized memory using section .bss and resb first"
   },
   "enter": {
     "prefix": "enter",

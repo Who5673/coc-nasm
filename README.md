@@ -35,7 +35,7 @@ __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one
 https://who5673.github.io/coc-nasm-web/
 ```
 This website is under construction.  
-- Test text
+- We are introducing a new compiler in the "See also" page (you need to enter that website and open the menu first). If you want to try, you can download and use it.
 
 ## About coc-nasm
 - Manufacturing date: The 6<sup>th</sup> of July, 2025 (7/6/2025 - mm/dd/yy).
@@ -75,8 +75,8 @@ coc-nasm has some special words for NASM to use like:
 - `sum` (snippet): Get a basic example of a function that calculates the sum of 2 integers.  
 - `default rel` (auto-completion): Must put this at the 1^st (first) line of the NASM language if you want to create and import a NASM library into C/C++ or in another NASM script.
 - `const` (snippet): `equ $-labelname` snippet to calculate the length of a string. Place this right after you have defined byte a string label.
-- `pi64` and `pi32` (snippets): Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture.
-- `basicoutput` (snippet): Write a basic script to print a variable into stdout (terminal screen). 
+- `pi64` and `pi32` (both of them were removed on October 6<sup>th</sup>, 2025, snippets): Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture.
+- `basicoutput` (removed after October 6<sup>th</sup>, 2025, snippet): Write a basic script to print a variable into stdout (terminal screen). 
 - Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
 - Supports preprocessors and standard macros;
 - You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/_vimrc (Windows)
