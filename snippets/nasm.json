@@ -301,6 +301,13 @@
     ],
     "description": "Like error, but stop instantly like panic, which is a very serious error which forces the compiler to stop compiling"
   },
+  "note": {
+    "prefix": "note",
+    "body": [
+      "note \"${MESSAGE}\""
+    ],
+    "description": "adds an output line to the list file; it does not output anything on the console or error file"
+  },
   "warning": {
     "prefix": "warning",
     "body": [
@@ -432,6 +439,42 @@
     ],
     "description": "If stalement for preprocessor"
   },
+  "ifdirective": {
+    "prefix": "ifdirective",
+    "body": [
+      "ifdirective ${1:DIRECTIVE}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "Test whether a directive is supported (introduced in NASM 3.00)"
+  },
+  "ifusable": {
+    "prefix": "ifusable",
+    "body": [
+      "ifusable ${1:STANDARD_PACKAGE}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "Test For Standard Macro Packages (introduced in NASM 3.00)"
+  },
+  "ifusing": {
+    "prefix": "ifusing",
+    "body": [
+      "ifusing ${1:STANDARD_PACKAGE}}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "Test For Standard Macro Packages (introduced in NASM 3.00), like %ifusable"
+  },
+  "iffile": {
+    "prefix": "iffile",
+    "body": [
+      "iffile ${1:FILE}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "Check if a file exists or not"
+  },
   "ifdef": {
     "prefix": "ifdef",
     "body": [
@@ -440,6 +483,15 @@
       "%endif"
     ],
     "description": "If symbol is defined"
+  },
+  "ifdefalias": {
+    "prefix": "ifdefalias",
+    "body": [
+      "ifdefalias ${1:ALIAS}",
+      "\t$0",
+      "%endif"
+    ],
+    "description": "If alias is defined"
   },
   "ifndef": {
     "prefix": "ifndef",
@@ -807,7 +859,7 @@
   "define": {
     "prefix": "define",
     "body": [
-      "define ${1:NAME} ${2:VALUE}"
+      "define ${1:NAME} "
     ],
     "description": "NASM %define macro in order to define a single-line macro"
   },
@@ -878,6 +930,13 @@
     ],
     "description": "NASM macro block in order to define a multi-line macro"
   },
+  "exitmacro": {
+    "prefix": "exitmacro",
+    "body": [
+      "exitmacro"
+    ],
+    "description": "Exit current macro"
+  },
   "imacro": {
     "prefix": "imacro",
     "body": [
@@ -913,14 +972,14 @@
   "xdefine": {
     "prefix": "xdefine",
     "body": [
-      "xdefine ${1:NAME} ${2:VALUE}"
+      "xdefine ${1:NAME} "
     ],
     "description": "NASM %xdefine (lazy macro)"
   },
   "idefine": {
     "prefix": "idefine",
     "body": [
-      "idefine ${1:NAME} ${2:VALUE}"
+      "idefine ${1:NAME} "
     ],
     "description": "NASM %idefine (case-insensitive macro)"
   },
