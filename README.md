@@ -45,7 +45,7 @@ This website is under construction.
 - __However__, it is one of the **strong** plugin for NASM.
 - Netwide Assembler does have a lack of good plugins for snippets and auto-completions so that is why coc-nasm needs to be invented.
 - coc-nasm has snippets and auto-completions for NASM, but note: This plugin does not support syntax highlighting. You may need them by installing third-party plugins for NASM. Fortunately, vim supports syntax highlighting for that language.
-- If you have any problem about this plugin, please fix it by yourself as this product is __NO WARRANTY__. However, I will tell you that my contact information is in contact.txt in GitHub repository.
+- If you have any problem about this plugin, please fix it by yourself as this product is __NO WARRANTY__. However, if you need my support, there is my contact information at `contact.txt` in the GitHub repository.
 
 ## Dependencies
 Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you also can install them from coc.nvim.
