@@ -1234,6 +1234,38 @@
       "I recommend you to combine this with %rep for the loops"
     ]
   },
+  "find": {
+    "prefix": "find",
+    "body": [
+      "find(${1:TARGET_CHAR}, ${2:TARGET_STRING_OR_CHARLIST})"
+    ],
+    "description": [
+      "; Find the target character in the target string (CASE-SENSITIVELY)",
+      "; Return an integer value which is the position of the target character in the string",
+      "; (where 1 is the first argument in the list)"
+    ]
+  },
+  "findi": {
+    "prefix": "findi",
+    "body": [
+      "findi(${1:TARGET_CHAR}, ${2:TARGET_STRING_OR_CHARLIST})"
+    ],
+    "description": [
+      "; Find the target character in the target string (CASE-INSENSITIVELY)",
+      "; Return an integer value which is the position of the target character in the string",
+      "; (where 1 is the first argument in the list)"
+    ]
+  },
+  "null": {
+    "prefix": "null",
+    "body": [
+      "null()"
+    ],
+    "description": [
+      "; According to NASM document on nasm.us:",
+      "; - Ignores its arguments without expanding them, and expands to nothing"
+    ]
+  },
   "__?USE_PACKAGE?__": {
     "prefix": "__?USE_package?__",
     "body": [

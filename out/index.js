@@ -271,8 +271,14 @@ my_func:
     ["fist", "Store st(0) as integer (truncate/floor depending on mode)"],
     ["fistp", "Store st(0) as integer and pop the FPU stack"],
     ["fldcw", "Load a value into FPU control word so as to change how FPU deals with the floating point number (rounding numbers, accuracy, handle exceptions,...).\nSyntax: fldcw [mem16]"],
+    // Standard Macros
     ["__?NASM_VERSION_ID?__", "Returns Netwide Assembler version ID (dword integer)"],
     ["__?NASM_VER?__", "Returns Netwide Assembler current version inside a script (bytes data)"],
+    ["__?NASM_HAS_IFDIRECTIVE?__", `
+  - Directive Probing Support: This macro is defined if this version of NASM supports the preprocessor tests like:
+  %ifdirective, %ifusable, %ifusing;
+  - Supports using %ifdef to test for the presence of preprocessor functions;
+  `],
     ["__?FILE?__", "Returns the name of the input file"],
     ["__?LINE?__", "Returns the number of current line in a file"],
     ["__?BITS?__", `
