@@ -22,66 +22,76 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-*Due to the high difficulty of Vietnamese tenth-grade exam, I cannot update this plugin regularly (2025 - 2026). I need to spend my time focusing on the skills to do that exam (I am just 14 years old).*
-# coc-nasm
-__coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one of the plugin for Netwide Assembler (NASM) programing. In fact, Assembly Languages and Assemblers have few plugins for coding, but that does not mean we do not have any of them to support us.  
+*Due to the high difficulty of Vietnamese Grade 10 Entrance Exam, I cannot update this plugin regularly (don't worry, it ends after the 31<sup>st</sup> of 2026 on which I take the exam). I need to spend my time focusing on the skills to do that exam (I am just 15 years old).*
+
+__coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one of the plugin for Netwide Assembler (NASM) programing. In fact, Assembly Languages and Assemblers have few plugins for coding, but that does not mean we do not have any of them to support them.  
   
-## Install coc-nasm:
-```
+## 📦 Install coc-nasm:
+```vim
 :CocInstall coc-nasm
 ```
-## Our website (work in progress):
+## 🌐 Our website (work in progress):
 ```
 https://who5673.github.io/coc-nasm-web/
 ```
-This website is under construction.  
-- We are introducing a new compiler in the "See also" page (you need to enter that website and open the menu first). If you want to try, you can download and use it.
+‼️ __NOTE__: That website is __under construction__.  
 
-## About coc-nasm
-- Manufacturing date: The 6<sup>th</sup> of July, 2025 (7/6/2025 - mm/dd/yy).
-- Reddit publish date: The 7<sup>th</sup> of July, 2025 (7/7/2025 - mm/dd/yy).
-- This package is under MIT License, open-source.
-- Maybe it is not the first Netwide Assembler plugin for auto-completion and snippet in the world.
-- __However__, it is one of the **strong** plugin for NASM.
-- Netwide Assembler does have a lack of good plugins for snippets and auto-completions so that is why coc-nasm needs to be invented.
-- coc-nasm has snippets and auto-completions for NASM, but note: This plugin does not support syntax highlighting. You may need them by installing third-party plugins for NASM. Fortunately, vim supports syntax highlighting for that language.
-- If you have any problem about this plugin, please fix it by yourself as this product is __NO WARRANTY__. However, if you need my support, there is my contact information at `contact.txt` in the GitHub repository.
-
-## Dependencies
-Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you also can install them from coc.nvim.
+## ℹ️About coc-nasm
+- 🚀 Manufacturing date: The 6<sup>th</sup> of July, 2025 (7/6/2025 - mm/dd/yy);
+- 👉🏻Reddit publish date: The 7<sup>th</sup> of July, 2025 (7/7/2025 - mm/dd/yy);
+- 👉🏼This package is under MIT License, open-source;
+- ❕It is one of the **strong** plugin for NASM;
+- Netwide Assembler does have a lack of good plugins for snippets and auto-completions so that is why coc-nasm needs to be invented;
+- `coc-nasm` has snippets and auto-completions for NASM, but note: This plugin does not support syntax highlighting. You may need them by installing third-party plugins for NASM. Fortunately, vim supports syntax highlighting for that language;
+- Should you have any problems while using this plugin, please report to me using GitHub Issues in order that I can be noticed as soon as I can. My contact information at `contact.txt` in the GitHub repository;
+  
+## 🧰 Dependencies
+Not all the dependencies of the app will be installed via `:CocInstall coc-nasm`, but you can install them from coc.nvim.  
 **Firstly**, to make sure that coc-nasm works correctly, after installing, you need to:
-- Open a `.nasm` file.
-- Make sure you have coc.nvim installed (coc.nvim is invented by neoclide)
-(github link: [`coc.nvim`](https://github.com/neoclide/coc.nvim))
+- Open a `.nasm` file;
+- Make sure you have coc.nvim installed (coc.nvim is released by neoclide);
+(github link: [`coc.nvim`](https://github.com/neoclide/coc.nvim))  
 __Secondly__, install coc-snippets, as coc-nasm depends much on it:  
-```
+```vim
 :CocInstall coc-snippets
 ```
 
 github link for coc-snippets (coc-snippets is invented by neoclide): [`coc-snippets`](https://github.com/neoclide/coc-snippets)
 
 - Execute this command in vim command mode: 
-```
+```vim
 :CocRestart
 ```
-- Reload vim or restart your computer if necessary.  
-- Now, as I does not use Neovim's Lua, I cannot support you to install this plugin via ~/.config/nvim/init.lua. If you know how to install this plugin using Lua, I think you will need to think of about the installation by yourself (even this can work on Neovim via Lua).
+- Reload vim or restart your computer if necessary;
+- 👉 Now, as I have not used Neovim's Lua to install this plgin, I cannot support you to install this plugin via ~/.config/nvim/init.lua. I am afraid that you need to think of the installation by yourself (even this can work on Neovim via Lua);
 
-- __Other suggested plugins for coc-nasm__: 
-## Features
-coc-nasm has some special words for NASM to use like:
-- `printHello` (snippet): Print an example Netwide Assembler program (for Linux, it prints "Hello world");  
-- `program` (snippet): Get a basic template of a Netwide Assembler program to start coding faster (if you want to make a library, do not use this snippet);  
-- `sum` (snippet): Get a basic example of a function that calculates the sum of 2 integers.  
-- `default rel` (auto-completion): Must put this at the 1^st (first) line of the NASM language if you want to create and import a NASM library into C/C++ or in another NASM script.
-- `const` (snippet): `equ $-labelname` snippet to calculate the length of a string. Place this right after you have defined byte a string label.
-- `pi64` and `pi32` (both of them were removed on October 6<sup>th</sup>, 2025, snippets): Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture.
-- `basicoutput` (removed after October 6<sup>th</sup>, 2025, snippet): Write a basic script to print a variable into stdout (terminal screen). 
+<!--__Other advised plugins for coc-nasm__-->
+## ➡️Features
+Currently, `coc-nasm` has some special words for NASM to use like:
+
+| Name  | Type (current)| Functions |
+| ----- | ------------- | --------- |
+|`printHello` | snippet | Print an example Netwide Assembler program (for Linux, it prints "Hello world"); |
+|`program` | snippet | Get a basic template of a Netwide Assembler program to start coding faster (if you want to make a library, do not use this snippet) |
+|`sum` | snippet | Get a basic example of a function that calculates the sum of 2 integers.  |
+|`default rel` | auto-completion | Must put this at the 1<sup>st</sup> (first) line of the NASM language if you want to create and import a NASM library into C/C++ or in another NASM script |
+|`const` | snippet | `equ $-labelname` snippet to calculate the length of a string. Place this right after you have defined byte a string label. |
+
+
+These are some snippets or completions that have been removed:
+
+| Name | Removing date (month/date/year) | Type | Functions |
+| ---- | ------------------------------- | ---- | --------- |
+|`pi64` and `pi32` | 10/6/2025 | snippet | Basic pi for 64-bit (pi64) and 32-bit (pi32) architecture |
+|`basicoutput` | 10/6/2025 | snippet | Write a basic script to print a variable into `stdout` (terminal screen). |
+
+↘️More features:
+
 - Supports basic NASM commands like `mov`, `lea`, `rep`,...and some registers like `rax`, `rdi`, `rsi`,...
 - Supports preprocessors and standard macros;
 - You do not need to configure anything in ~/.vimrc (Unix-based Operating System) or ~/_vimrc (Windows)
 
-## Please Note:
+## ⚠️Please Note:
 - This plugin is created so as to make you write the script faster, not for creating an environment to code NASM language more modern.  
 Therefore, I am not going to make a Language Server Protocol (LSP), formatters, IntelliSense, live preview or hot Reload, like modern plugins on VS Code and coc.nvim do.  
 - You can use this plugin on Windows, but I recommend you to use this on Linux as I write this plugin on Kali Linux so that I may not know the issue it will happen in Windows Latest Version.
@@ -94,11 +104,10 @@ Therefore, I am not going to make a Language Server Protocol (LSP), formatters, 
 ___Would you like to write more plugins for programming Assembler languages in the world?___  
 - Please answer my question in your mind and come up with your idea if you can. You do not need to send that idea to me.  
   
-## See also 
+## 💡See also 
 [`who5673-nasm`](https://github.com/Who5673/who5673-nasm) - A plugin which has the benefit is almost like this plugin but for `lazy.nvim`
 
-## My plan in the future
-- Making a source code to help people program Object-Oriented Programming in the future.
+## 🤔 My plan in the future
 - Creating a compiler to compile Netwide Assembler to WebAssembly (it is hard, so I can not do it by myself, but no one helps me so I need to it on my own).  
 
 Thank you for using my coc-nasm plugin so much.  
@@ -108,5 +117,5 @@ Copyright &copy; by who5673. All rights served.
   
 This is an official coc.nvim plugin for NASM (made by who5673).  
 
-## License
+## 🗎 License
 MIT
