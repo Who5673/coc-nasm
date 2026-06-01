@@ -22,8 +22,6 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-*Due to the high difficulty of Vietnamese Grade 10 Entrance Exam, I cannot update this plugin regularly (don't worry, it ends after the 31<sup>st</sup> of 2026 on which I take the exam). I need to spend my time focusing on the skills to do that exam (I am just 15 years old).*
-
 __coc-nasm__ is a vim plug which can be downloaded from coc.nvim. It is also one of the plugin for Netwide Assembler (NASM) programing. In fact, Assembly Languages and Assemblers have few plugins for coding, but that does not mean we do not have any of them to support them.  
   
 ## 📦 Install coc-nasm:
